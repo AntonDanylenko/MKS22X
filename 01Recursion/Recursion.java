@@ -14,14 +14,20 @@ public class Recursion{
 		if (n<0){
 			throw new IllegalArgumentException("n must not be negative");
 		}
-		return fibHelp(n, 0);
+		return fibHelp(n, 0, 1);
 	}
 
-	private int fibHelp(int start, int end, int sum){
-		if (start==end){
-			return sum;
+	private int fibHelp(int n, int prelast, int last){
+		if (n==0){
+			return 0;
 		}
-		return fibHelp(start+1, end, n + r)
+		if (n==1){
+			return 1;
+		}
+		if (n==2){
+			return prelast + last;
+		}
+		return fibHelp(n-1, last, prelast + last);
 	}
 
 
