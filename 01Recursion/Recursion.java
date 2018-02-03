@@ -10,6 +10,7 @@ public class Recursion{
 	}
 
 
+
 	public int fib(int n){
 		if (n<0){
 			throw new IllegalArgumentException("n must not be negative");
@@ -31,6 +32,7 @@ public class Recursion{
 	}
 
 
+
 	public double sqrt(double n){
 		if (n<0){
 			throw new IllegalArgumentException("n must not be negative");
@@ -41,10 +43,25 @@ public class Recursion{
 		return sqrtHelp(n, 1);
 	}
 
-	public double sqrtHelp(double n, double guess){
-		if (guess * guess < 1.0005 * n || guess * guess > 0.9995 * n){
+	private double sqrtHelp(double n, double guess){
+		if (guess * guess < 1.0005 * n && guess * guess > 0.9995 * n){
 			return guess;
 		}
-		return (n, (n/guess + guess)/2);
+		return sqrtHelp(n, (n/guess + guess)/2);
+	}
+
+
+
+	public static void main(String[]args){
+		Recursion r = new Recursion();
+
+		System.out.println("fact(10) = " + r.fact(10));
+		System.out.println("fact(0) = " + r.fact(0));
+		System.out.println("fib(10) = " + r.fib(10));
+		System.out.println("fib(40) = " + r.fib(40));
+		System.out.println("fib(0) = " + r.fib(0));
+		System.out.println("sqrt(100) = " + r.sqrt(100));
+		System.out.println("sqrt(0.0036) = " + r.sqrt(0.0036));
+		System.out.println("sqrt(0) = " + r.sqrt(0));
 	}
 }
