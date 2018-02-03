@@ -44,7 +44,8 @@ public class Recursion{
 	}
 
 	private double sqrtHelp(double n, double guess){
-		if (guess * guess < 1.0005 * n && guess * guess > 0.9995 * n){
+		//if (guess * guess < 1.0005 * n && guess * guess > 0.9995 * n){
+		if (guess * guess == n){
 			return guess;
 		}
 		return sqrtHelp(n, (n/guess + guess)/2);
@@ -52,7 +53,7 @@ public class Recursion{
 
 
 
-	public static void main(String[]args){
+	/*public static void main(String[]args){
 		Recursion r = new Recursion();
 
 		System.out.println("fact(10) = " + r.fact(10));
@@ -62,6 +63,7 @@ public class Recursion{
 		System.out.println("fib(0) = " + r.fib(0));
 		System.out.println("sqrt(100) = " + r.sqrt(100));
 		System.out.println("sqrt(0.0036) = " + r.sqrt(0.0036));
+		System.out.println("sqrt(100000000) = " + r.sqrt(100000000));
 		System.out.println("sqrt(0) = " + r.sqrt(0));
-	}
+	}*/
 }
