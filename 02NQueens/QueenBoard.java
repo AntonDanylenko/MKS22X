@@ -87,28 +87,38 @@ public class QueenBoard{
 	}
 	for (int n=0; n<board.length; n++){
 	    if(addQueen(n, col)){
-		/*System.out.println(Text.go(1,1));
-		System.out.println(this);
-		Text.wait(1500); //adjust this delay*/
 		if (solveHelp(col+1)){
 		    return true;
 		}
 		removeQueen(n, col);
-		/*System.out.println(Text.go(1,1));
-		System.out.println(this);
-		Text.wait(1500); //adjust this delay*/
 	    }
 	}
 	return false;
     }
 
     public int countSolutions(){
-	return 0;
+	return countHelp(0, 0);
+    }
+
+    private int countHelp(int col, int sum){
+	if (col == board.length){
+	    return 1;
+	}
+	for (int n=0; n<board.length; n++){
+	    if(addQueen(n, col)){
+		if (countHelp(col+1, sum)>0){
+		    sum+=1;
+		    return sum;
+		}
+		removeQueen(n, col);
+	    }
+	}
+	return sum;
     }
 
     public static void main(String[]args){
-	QueenBoard newBoard = new QueenBoard(8);
-	System.out.println(newBoard.solve());
+	QueenBoard newBoard = new QueenBoard(20);
+	System.out.println(newBoard.countSolutions());
 	System.out.println(newBoard);
     }
 }
