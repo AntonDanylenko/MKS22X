@@ -9,20 +9,20 @@ public class QueenBoard{
 	if (board[r][c]!=0){
 	    return false;
 	}
-	for (int n=c; n<board.length; n++){
+	for (int n=0; n<board.length; n++){
 	    board[r][n]+=1;
     }
-	for (int p=r; p<board.length; p++){
+	for (int p=0; p<board.length; p++){
 	    board[p][c]+=1;
     }
-	for (int q=c; q<board.length; q++){
+	for (int q=0; q<board.length; q++){
         try{
         board[r+q][c+q]+=1;
         }
         catch(ArrayIndexOutOfBoundsException e){
         }
     }
-	for (int s=c; s<board.length; s++){
+	for (int s=0; s<board.length; s++){
         try{
         board[r-s][c+s]+=1;
         }
@@ -37,20 +37,20 @@ public class QueenBoard{
 	if (board[r][c]!=-1){
 	    return false;
 	}
-	for (int n=c; n<board.length; n++){
+	for (int n=0; n<board.length; n++){
 	    board[r][n]-=1;
     }
-	for (int p=r; p<board.length; p++){
+	for (int p=0; p<board.length; p++){
 	    board[p][c]-=1;
     }
-	for (int q=c; q<board.length; q++){
+	for (int q=0; q<board.length; q++){
         try{
         board[r+q][c+q]-=1;
         }
         catch(ArrayIndexOutOfBoundsException e){
         }
     }
-	for (int s=c; s<board.length; s++){
+	for (int s=0; s<board.length; s++){
         try{
         board[r-s][c+s]-=1;
         }
@@ -65,7 +65,12 @@ public class QueenBoard{
 	String result = "";
 	for (int n=0; n<board.length; n++){
 	    for (int r=0; r<board.length; r++){
-		result = result +  board[r][n] + " ";
+		if (board[r][n]!=-1){
+		    result = result + "_ ";
+		}
+		else{
+		    result = result + "Q ";
+		}
 	    }
 	    result += "\n";
 	}
@@ -82,11 +87,17 @@ public class QueenBoard{
 	}
 	for (int n=0; n<board.length; n++){
 	    if(addQueen(n, col)){
-	    if (solveHelp(col+1)){
-		return true;
+		/*System.out.println(Text.go(1,1));
+		System.out.println(this);
+		Text.wait(1500); //adjust this delay*/
+		if (solveHelp(col+1)){
+		    return true;
+		}
+		removeQueen(n, col);
+		/*System.out.println(Text.go(1,1));
+		System.out.println(this);
+		Text.wait(1500); //adjust this delay*/
 	    }
-	    removeQueen(n, col);
-        }
 	}
 	return false;
     }
@@ -96,7 +107,7 @@ public class QueenBoard{
     }
 
     public static void main(String[]args){
-	QueenBoard newBoard = new QueenBoard(4);
+	QueenBoard newBoard = new QueenBoard(8);
 	System.out.println(newBoard.solve());
 	System.out.println(newBoard);
     }
