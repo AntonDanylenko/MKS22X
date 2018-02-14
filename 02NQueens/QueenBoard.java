@@ -78,6 +78,13 @@ public class QueenBoard{
     }
 
     public boolean solve(){
+    for (int n=0; n<board.length; n++){
+        for (int r=0; r<board.length; r++){
+            if(board[n][r]!=0){
+                throw new IllegalStateException();
+            }
+        }
+    }
 	return solveHelp(0);
     }
     
@@ -97,6 +104,13 @@ public class QueenBoard{
     }
 
     public int countSolutions(){
+    for (int n=0; n<board.length; n++){
+        for (int r=0; r<board.length; r++){
+            if(board[n][r]!=0){
+                throw new IllegalStateException();
+            }
+        }
+    }
 	return countHelp(0, 0);
     }
 
@@ -116,9 +130,9 @@ public class QueenBoard{
 	return sum;
     }
 
-    public static void main(String[]args){
-	QueenBoard newBoard = new QueenBoard(10);
-	System.out.println(newBoard.countSolutions());
+    /*public static void main(String[]args){
+	QueenBoard newBoard = new QueenBoard(4);
+	System.out.println(newBoard.solve());
 	System.out.println(newBoard);
-    }
+    }*/
 }
