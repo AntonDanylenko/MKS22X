@@ -106,9 +106,9 @@ public class QueenBoard{
 	}
 	for (int n=0; n<board.length; n++){
 	    if(addQueen(n, col)){
-		if (countHelp(col+1, sum)>0){
-		    sum+=1;
-		    return sum;
+		int num = countHelp(col+1, 0);
+		if (num>0){
+		    sum+=num;
 		}
 		removeQueen(n, col);
 	    }
@@ -117,7 +117,7 @@ public class QueenBoard{
     }
 
     public static void main(String[]args){
-	QueenBoard newBoard = new QueenBoard(20);
+	QueenBoard newBoard = new QueenBoard(10);
 	System.out.println(newBoard.countSolutions());
 	System.out.println(newBoard);
     }
