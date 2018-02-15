@@ -12,7 +12,12 @@ public class KnightBoard{
 	String result = "";
 	for (int n=0; n<board.length; n++){
 	    for (int r=0; r<board[0].length; r++){
-		result = result + board[r][n] + " ";
+		if (board[r][n] < 10){
+		    result = result + " " + board[r][n] + " ";
+		}
+		else{
+		    result = result + board[r][n] + " ";
+		}
 	    }
 	    result += "\n";
 	}
@@ -34,17 +39,10 @@ public class KnightBoard{
 	if (board[row][col]>0){
 	    return false;
 	}
-	/*System.out.println(Text.go(1,1));
-	System.out.println(this);
-	Text.wait(1500); //adjust this delay*/
-	//board[row][col] = level;
-	/*System.out.println(Text.go(1,1));
-	System.out.println(this);
-	Text.wait(1500); //adjust this delay*/
+	board[row][col] = level;
 	if (level == board[0].length * board.length){
 	    return true;
 	}
-	board[row][col] = level;
 	boolean solved =  solveHelp(row+2, col+1, level+1) ||
 	       solveHelp(row+2, col-1, level+1) ||
 	       solveHelp(row-2, col+1, level+1) ||
@@ -67,7 +65,7 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
-	KnightBoard newBoard = new KnightBoard(7,7);
+	KnightBoard newBoard = new KnightBoard(4,4);
 	System.out.println(newBoard.solve(0,0));
 	System.out.println(newBoard);
     }
