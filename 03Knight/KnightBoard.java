@@ -81,26 +81,24 @@ public class KnightBoard{
 	}
 	board[row][col] = level;
 	if (level == board[0].length * board.length){
-	    return sum;
-	}
-	int num = sum + 0;
-	num += countHelp(row+2, col+1, sum, level+1);
-	num += countHelp(row+2, col-1, sum, level+1);
-	num += countHelp(row-2, col+1, sum, level+1);
-	num += countHelp(row-2, col-1, sum, level+1);
-	num += countHelp(row+1, col+2, sum, level+1);
-	num += countHelp(row+1, col-2, sum, level+1);
-	num += countHelp(row-1, col+2, sum, level+1);
-	num += countHelp(row-1, col-2, sum, level+1);
-	if (num == sum){
 	    board[row][col] = 0;
-        }
-	return num;
+	    return 1;
+	}
+	sum += countHelp(row+2, col+1, 0, level+1);
+	sum += countHelp(row+2, col-1, 0, level+1);
+	sum += countHelp(row-2, col+1, 0, level+1);
+	sum += countHelp(row-2, col-1, 0, level+1);
+	sum += countHelp(row+1, col+2, 0, level+1);
+	sum += countHelp(row+1, col-2, 0, level+1);
+	sum += countHelp(row-1, col+2, 0, level+1);
+	sum += countHelp(row-1, col-2, 0, level+1);
+	board[row][col] = 0;
+	return sum;
     }
 
     public static void main(String[]args){
 	KnightBoard newBoard = new KnightBoard(5,6);
-	System.out.println(newBoard.countSolutions(0,0));
+	System.out.println(newBoard.countSolutions(4,5));
 	System.out.println(newBoard);
     }
 }
