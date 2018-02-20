@@ -61,14 +61,14 @@ public class KnightBoard{
 	int all = 0;
 	for (int n=0; n<board.length; n++){
 	    for (int r=0; r<board[0].length; r++){
-		all += countHelp(n, r, 0, 0);
+		all += countHelp(n, r, 0, 1);
 	    }
 	}
 	return all;
     }
 
     public int countSolutions(int startingRow, int startingCol){
-	return countHelp(startingRow, startingCol, 0, 0);
+	return countHelp(startingRow, startingCol, 0, 1);
     }
 
     public int countHelp(int row, int col, int sum, int level){
@@ -97,8 +97,9 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
-	KnightBoard newBoard = new KnightBoard(5,6);
-	System.out.println(newBoard.countSolutions(4,5));
+	KnightBoard newBoard = new KnightBoard(7,7);
+	System.out.println(newBoard.solve(0,0));
+	System.out.println(newBoard.countSolutions(0,0));
 	System.out.println(newBoard);
     }
 }
