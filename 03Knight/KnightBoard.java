@@ -10,9 +10,12 @@ public class KnightBoard{
 
     public String toString(){
 	String result = "";
-	for (int n=0; n<board[0].length; n++){
-	    for (int r=0; r<board.length; r++){
-		if (board[r][n] < 10){
+	for (int r=0; r<board.length; r++){
+	    for (int n=0; n<board[0].length; n++){
+        if (board[r][n] == 0){
+            result = result + " _ ";
+        }
+		else if (board[r][n] < 10){
 		    result = result + " " + board[r][n] + " ";
 		}
 		else{
@@ -25,8 +28,16 @@ public class KnightBoard{
     }
 
     public boolean solve(int startingRow, int startingCol){
-        if (startingRow<0 || startingCol<0){
+        if (startingRow<0 || startingCol<0 || 
+            startingRow>=board.length || startingCol>=board[0].length){
             throw new IllegalArgumentException();
+        }
+	    for (int r=0; r<board.length; r++){
+	        for (int n=0; n<board[0].length; n++){
+                if (board[r][n]!=0){
+                    throw new IllegalArgumentException();
+                }
+            }
         }
 	return solveHelp(startingRow, startingCol, 1);
     }
@@ -68,6 +79,17 @@ public class KnightBoard{
     }
 
     public int countSolutions(int startingRow, int startingCol){
+        if (startingRow<0 || startingCol<0 || 
+            startingRow>=board.length || startingCol>=board[0].length){
+            throw new IllegalArgumentException();
+        }
+	    for (int r=0; r<board.length; r++){
+	        for (int n=0; n<board[0].length; n++){
+                if (board[r][n]!=0){
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
 	return countHelp(startingRow, startingCol, 0, 1);
     }
 
@@ -97,9 +119,9 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
-	KnightBoard newBoard = new KnightBoard(7,7);
-	System.out.println(newBoard.solve(0,0));
+	KnightBoard newBoard = new KnightBoard(3,3);
 	System.out.println(newBoard.countSolutions(0,0));
+	System.out.println(newBoard.solve(0,0));
 	System.out.println(newBoard);
     }
 }
