@@ -42,21 +42,6 @@ public class KnightBoard{
 	return solveHelp(startingRow, startingCol, 1);
     }
 
-    public boolean solveFast(){
-        if (startingRow<0 || startingCol<0 || 
-            startingRow>=board.length || startingCol>=board[0].length){
-            throw new IllegalArgumentException();
-        }
-	    for (int r=0; r<board.length; r++){
-	        for (int n=0; n<board[0].length; n++){
-                if (board[r][n]!=0){
-                    throw new IllegalArgumentException();
-                }
-            }
-        }
-	return solveHelp(0, 0, 1);
-    }
-
     private boolean solveHelp(int row, int col, int level){
 	if (row>=board.length || col>=board[0].length ||
 	    row<0 || col<0){
@@ -77,6 +62,85 @@ public class KnightBoard{
 	       solveHelp(row+1, col-2, level+1) ||
 	       solveHelp(row-1, col+2, level+1) ||
 	       solveHelp(row-1, col-2, level+1);
+	if (!solved){
+	    board[row][col] = 0;
+        }
+	return solved;
+    }
+
+
+
+
+
+
+    public boolean solveFast(int startingRow, int startingCol){
+        if (startingRow<0 || startingCol<0 || 
+            startingRow>=board.length || startingCol>=board[0].length){
+            throw new IllegalArgumentException();
+        }
+	    for (int r=0; r<board.length; r++){
+	        for (int n=0; n<board[0].length; n++){
+                if (board[r][n]!=0){
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
+	return solveHelpFast(startingRow, startingCol, 1);
+    }
+
+    private boolean solveHelpFast(int row, int col, int level){
+	if (row>=board.length || col>=board[0].length ||
+	    row<0 || col<0){
+	    return false;
+	}
+	if (board[row][col]>0){
+	    return false;
+	}
+	board[row][col] = level;
+	if (level == board[0].length * board.length){
+	    return true;
+	}
+	boolean solved = false;
+	if (row+2 < 2 || row+2 >= board.length - 2){
+		if (col+1 < 2 || col+1 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row+2, col+1, level+1);
+		}
+		if (col-1 < 2 || col-1 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row+2, col-1, level+1);
+		}
+	}
+	if (row+1 < 2 || row+1 >= board.length - 2){
+		if (col+2 < 2 || col+2 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row+1, col+2, level+1);
+		}
+		if (col-2 < 2 || col-2 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row+1, col-2, level+1);
+		}
+	}
+	if (row-2 < 2 || row-2 >= board.length - 2){
+		if (col+1 < 2 || col+1 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row-2, col+1, level+1);
+		}
+		if (col-1 < 2 || col-1 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row-2, col-1, level+1);
+		}
+	}
+	if (row-1 < 2 || row-1 >= board.length - 2){
+		if (col+2 < 2 || col+2 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row-1, col+2, level+1);
+		}
+		if (col-2 < 2 || col-2 >= board[0].length - 2){
+			solved = solved || solveHelpFast(row-1, col-2, level+1);
+		}
+	}
+	solved =  solved || solveHelpFast(row+2, col+1, level+1) ||
+	       solveHelpFast(row+2, col-1, level+1) ||
+	       solveHelpFast(row-2, col+1, level+1) ||
+	       solveHelpFast(row-2, col-1, level+1) ||
+	       solveHelpFast(row+1, col+2, level+1) ||
+	       solveHelpFast(row+1, col-2, level+1) ||
+	       solveHelpFast(row-1, col+2, level+1) ||
+	       solveHelpFast(row-1, col-2, level+1);
 	if (!solved){
 	    board[row][col] = 0;
         }
@@ -144,8 +208,12 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
-	KnightBoard newBoard = new KnightBoard(5*5);
-	System.out.println(newBoard.solveFast();
-	System.out.println(newBoard);
+	KnightBoard newBoard1 = new KnightBoard(8,8);
+	System.out.println(newBoard1.solveFast(0,0));
+	System.out.println(newBoard1);
+
+	//KnightBoard newBoard2 = new KnightBoard(8,8);
+	//System.out.println(newBoard2.solve(0,0));
+	//System.out.println(newBoard2);
     }
 }
