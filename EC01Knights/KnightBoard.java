@@ -101,46 +101,40 @@ public class KnightBoard{
 	    return true;
 	}
 	boolean solved = false;
-	if (row+2 < 2 || row+2 >= board.length - 2){
-		if (col+1 < 2 || col+1 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row+2, col+1, level+1);
-		}
-		if (col-1 < 2 || col-1 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row+2, col-1, level+1);
-		}
+	if (row+2 >= board.length - 2){
+			solved = solved || solveHelpFast(row+2, col+1, level+1) || 
+							   solveHelpFast(row+2, col-1, level+1);
 	}
 	if (row+1 < 2 || row+1 >= board.length - 2){
-		if (col+2 < 2 || col+2 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row+1, col+2, level+1);
-		}
-		if (col-2 < 2 || col-2 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row+1, col-2, level+1);
-		}
+			solved = solved || solveHelpFast(row+1, col+2, level+1) || 
+							   solveHelpFast(row+1, col-2, level+1);
 	}
-	if (row-2 < 2 || row-2 >= board.length - 2){
-		if (col+1 < 2 || col+1 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row-2, col+1, level+1);
-		}
-		if (col-1 < 2 || col-1 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row-2, col-1, level+1);
-		}
+	if (row-2 < 2){
+			solved = solved || solveHelpFast(row-2, col+1, level+1) || 
+							   solveHelpFast(row-2, col-1, level+1);
 	}
 	if (row-1 < 2 || row-1 >= board.length - 2){
-		if (col+2 < 2 || col+2 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row-1, col+2, level+1);
-		}
-		if (col-2 < 2 || col-2 >= board[0].length - 2){
-			solved = solved || solveHelpFast(row-1, col-2, level+1);
-		}
+			solved = solved || solveHelpFast(row-1, col+2, level+1) || 
+							   solveHelpFast(row-1, col-2, level+1);
 	}
-	solved =  solved || solveHelpFast(row+2, col+1, level+1) ||
-	       solveHelpFast(row+2, col-1, level+1) ||
-	       solveHelpFast(row-2, col+1, level+1) ||
-	       solveHelpFast(row-2, col-1, level+1) ||
-	       solveHelpFast(row+1, col+2, level+1) ||
-	       solveHelpFast(row+1, col-2, level+1) ||
-	       solveHelpFast(row-1, col+2, level+1) ||
-	       solveHelpFast(row-1, col-2, level+1);
+
+
+	if (row+2 < board.length - 2){
+			solved = solved || solveHelpFast(row+2, col+1, level+1) || 
+							   solveHelpFast(row+2, col-1, level+1);
+	}
+	if (row+1 >= 2 && row+1 < board.length - 2){
+			solved = solved || solveHelpFast(row+1, col+2, level+1) || 
+							   solveHelpFast(row+1, col-2, level+1);
+	}
+	if (row-2 >= 2){
+			solved = solved || solveHelpFast(row-2, col+1, level+1) || 
+							   solveHelpFast(row-2, col-1, level+1);
+	}
+	if (row-1 >= 2 && row-1 < board.length - 2){
+			solved = solved || solveHelpFast(row-1, col+2, level+1) || 
+							   solveHelpFast(row-1, col-2, level+1);
+	}
 	if (!solved){
 	    board[row][col] = 0;
         }
@@ -208,12 +202,18 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
-	KnightBoard newBoard1 = new KnightBoard(8,8);
-	System.out.println(newBoard1.solveFast(0,0));
-	System.out.println(newBoard1);
+	KnightBoard newBoard2 = new KnightBoard(7,7);
+	final long startTime2 = System.currentTimeMillis();
+	System.out.println(newBoard2.solve(0,0));
+	final long endTime2 = System.currentTimeMillis();
+	System.out.println("Total execution time: " + (endTime2 - startTime2) );
+	System.out.println(newBoard2);
 
-	//KnightBoard newBoard2 = new KnightBoard(8,8);
-	//System.out.println(newBoard2.solve(0,0));
-	//System.out.println(newBoard2);
+	KnightBoard newBoard1 = new KnightBoard(7,7);
+	final long startTime = System.currentTimeMillis();
+	System.out.println(newBoard1.solveFast(0,0));
+	final long endTime = System.currentTimeMillis();
+	System.out.println("Total execution time: " + (endTime - startTime) );
+	System.out.println(newBoard1);
     }
 }
