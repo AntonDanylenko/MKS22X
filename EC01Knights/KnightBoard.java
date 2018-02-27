@@ -68,6 +68,89 @@ public class KnightBoard{
 	return solved;
     }
 
+
+
+
+
+
+    public boolean solveFast(int startingRow, int startingCol){
+        if (startingRow<0 || startingCol<0 || 
+            startingRow>=board.length || startingCol>=board[0].length){
+            throw new IllegalArgumentException();
+        }
+	    for (int r=0; r<board.length; r++){
+	        for (int n=0; n<board[0].length; n++){
+                if (board[r][n]!=0){
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
+	return solveHelpFast(startingRow, startingCol, 1);
+    }
+
+    private boolean solveHelpFast(int row, int col, int level){
+	if (row>=board.length || col>=board[0].length ||
+	    row<0 || col<0){
+	    return false;
+	}
+	if (board[row][col]>0){
+	    return false;
+	}
+	board[row][col] = level;
+	if (level == board[0].length * board.length){
+	    return true;
+	}
+	boolean solved = false;
+	if (row+2 >= board.length - 2){
+			solved = solved || solveHelpFast(row+2, col+1, level+1) || 
+							   solveHelpFast(row+2, col-1, level+1);
+	}
+	if (row+1 < 2 || row+1 >= board.length - 2){
+			solved = solved || solveHelpFast(row+1, col+2, level+1) || 
+							   solveHelpFast(row+1, col-2, level+1);
+	}
+	if (row-2 < 2){
+			solved = solved || solveHelpFast(row-2, col+1, level+1) || 
+							   solveHelpFast(row-2, col-1, level+1);
+	}
+	if (row-1 < 2 || row-1 >= board.length - 2){
+			solved = solved || solveHelpFast(row-1, col+2, level+1) || 
+							   solveHelpFast(row-1, col-2, level+1);
+	}
+
+
+	if (row+2 < board.length - 2){
+			solved = solved || solveHelpFast(row+2, col+1, level+1) || 
+							   solveHelpFast(row+2, col-1, level+1);
+	}
+	if (row+1 >= 2 && row+1 < board.length - 2){
+			solved = solved || solveHelpFast(row+1, col+2, level+1) || 
+							   solveHelpFast(row+1, col-2, level+1);
+	}
+	if (row-2 >= 2){
+			solved = solved || solveHelpFast(row-2, col+1, level+1) || 
+							   solveHelpFast(row-2, col-1, level+1);
+	}
+	if (row-1 >= 2 && row-1 < board.length - 2){
+			solved = solved || solveHelpFast(row-1, col+2, level+1) || 
+							   solveHelpFast(row-1, col-2, level+1);
+	}
+	if (!solved){
+	    board[row][col] = 0;
+        }
+	return solved;
+    }
+
+
+
+
+
+
+
+
+
+
+
     public int allSolutions(){
 	int all = 0;
 	for (int n=0; n<board.length; n++){
@@ -93,7 +176,7 @@ public class KnightBoard{
 	return countHelp(startingRow, startingCol, 0, 1);
     }
 
-    public int countHelp(int row, int col, int sum, int level){
+    private int countHelp(int row, int col, int sum, int level){
 	if (row>=board.length || col>=board[0].length ||
 	    row<0 || col<0){
 	    return 0;
@@ -103,21 +186,6 @@ public class KnightBoard{
 	}
 	board[row][col] = level;
 	if (level == board[0].length * board.length){
-<<<<<<< HEAD
-	    return sum;
-	}
-	int num = sum;
-	num += countHelp(row+2, col+1, sum, level+1);
-	num += countHelp(row+2, col-1, sum, level+1);
-	num += countHelp(row-2, col+1, sum, level+1);
-	num += countHelp(row-2, col-1, sum, level+1);
-	num += countHelp(row+1, col+2, sum, level+1);
-	num += countHelp(row+1, col-2, sum, level+1);
-	num += countHelp(row-1, col+2, sum, level+1);
-	num += countHelp(row-1, col-2, sum, level+1);
-	if (num == sum){
-=======
->>>>>>> c7a672e27ac5a1f89ccd379c8d8b7215c2b2be2a
 	    board[row][col] = 0;
 	    return 1;
 	}
@@ -134,9 +202,18 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
-	KnightBoard newBoard = new KnightBoard(3,3);
-	System.out.println(newBoard.countSolutions(0,0));
-	System.out.println(newBoard.solve(0,0));
-	System.out.println(newBoard);
+	KnightBoard newBoard2 = new KnightBoard(7,7);
+	final long startTime2 = System.currentTimeMillis();
+	System.out.println(newBoard2.solve(0,0));
+	final long endTime2 = System.currentTimeMillis();
+	System.out.println("Total execution time: " + (endTime2 - startTime2) );
+	System.out.println(newBoard2);
+
+	KnightBoard newBoard1 = new KnightBoard(7,7);
+	final long startTime = System.currentTimeMillis();
+	System.out.println(newBoard1.solveFast(0,0));
+	final long endTime = System.currentTimeMillis();
+	System.out.println("Total execution time: " + (endTime - startTime) );
+	System.out.println(newBoard1);
     }
 }
