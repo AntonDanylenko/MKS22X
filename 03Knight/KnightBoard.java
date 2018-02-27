@@ -103,21 +103,6 @@ public class KnightBoard{
 	}
 	board[row][col] = level;
 	if (level == board[0].length * board.length){
-<<<<<<< HEAD
-	    return sum;
-	}
-	int num = sum;
-	num += countHelp(row+2, col+1, sum, level+1);
-	num += countHelp(row+2, col-1, sum, level+1);
-	num += countHelp(row-2, col+1, sum, level+1);
-	num += countHelp(row-2, col-1, sum, level+1);
-	num += countHelp(row+1, col+2, sum, level+1);
-	num += countHelp(row+1, col-2, sum, level+1);
-	num += countHelp(row-1, col+2, sum, level+1);
-	num += countHelp(row-1, col-2, sum, level+1);
-	if (num == sum){
-=======
->>>>>>> c7a672e27ac5a1f89ccd379c8d8b7215c2b2be2a
 	    board[row][col] = 0;
 	    return 1;
 	}
