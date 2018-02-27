@@ -83,7 +83,7 @@ public class KnightBoard{
 	if (level == board[0].length * board.length){
 	    return sum;
 	}
-	int num = sum + 0;
+	int num = sum;
 	num += countHelp(row+2, col+1, sum, level+1);
 	num += countHelp(row+2, col-1, sum, level+1);
 	num += countHelp(row-2, col+1, sum, level+1);
