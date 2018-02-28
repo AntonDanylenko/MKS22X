@@ -53,7 +53,7 @@ public class Maze{
 	    }
 	}
 	if (numS!=1 || numE!=1){
-	    throw IllegalStateException();
+	    throw new IllegalStateException();
 	}
     }
     
@@ -101,7 +101,7 @@ public class Maze{
             //and start solving at the location of the s.
 
             //return solve(???,???);
-
+			return 0;
     }
 
     /*
