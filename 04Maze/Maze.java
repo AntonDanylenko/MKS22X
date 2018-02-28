@@ -25,7 +25,36 @@ public class Maze{
     */
 
     public Maze(String filename) throws FileNotFoundException{
-        
+        Scanner reader = new Scanner(filename);
+	int numRows = 0;
+	while (reader.hasNextLine()){
+	    numRows++;
+	}
+	int numCols = 0;
+	while (!reader.next().equals("\n")){
+	    numCols++;
+	}
+	maze = new char[numRows][numCols];
+
+	for (int r=0; r<numRows; r++){
+	    maze[r] = reader.nextLine().toCharArray();
+	}
+
+	int numS = 0;
+	int numE = 0;
+	for (int r=0; r<numRows; r++){
+	    for (int c=0; c<numCols; c++){
+		if (maze[r][c] == 'S'){
+		    numS++;
+		}
+		else if(maze[r][c] == 'E'){
+		    numE++;
+		}
+	    }
+	}
+	if (numS!=1 || numE!=1){
+	    throw IllegalStateException();
+	}
     }
     
 
@@ -110,5 +139,7 @@ public class Maze{
         return -1; //so it compiles
     }
 
-
+    public static void main(String[]args){
+	Maze m1 = new Maze("data1.dat");
+    }
 }
