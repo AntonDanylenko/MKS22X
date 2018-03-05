@@ -25,21 +25,40 @@ public class Maze{
     */
 
     public Maze(String filename) throws FileNotFoundException{
-        Scanner reader = new Scanner(filename);
+		File text = new File(filename);
+        Scanner reader = new Scanner(text);
+	//System.out.println(reader);
+	String file = "";
 	int numRows = 0;
-	while (reader.hasNextLine()){
-	    numRows++;
-	}
 	int numCols = 0;
-	while (!reader.next().equals("\n")){
-	    numCols++;
+	while (reader.hasNextLine()){
+		String line = reader.nextLine();
+		//System.out.println(line);
+		numCols = line.length();
+		numRows++;
+	    file += line;
 	}
+	//System.out.println(file);
+	//System.out.println("NumRows: " + numRows + "\nNumCols: " + numCols);
+
+
 	maze = new char[numRows][numCols];
 
 	
 	for (int r=0; r<numRows; r++){
-	    maze[r] = reader.nextLine().toCharArray();
+		for (int c=0; c<numCols; c++){
+			maze[r][c] = file.charAt(r*numCols + c);
+		}
 	}
+
+	/*for (int r=0; r<numRows; r++){
+		String line = "";
+	    for (int c=0; c<numCols; c++){
+			line += maze[r][c];
+		}
+		System.out.println(line);
+	}*/
+    
 
 	int numS = 0;
 	int numE = 0;
@@ -53,6 +72,7 @@ public class Maze{
 		}
 	    }
 	}
+	//System.out.println("NumS: " + numS + "\nNumE: " + numE);
 	if (numS!=1 || numE!=1){
 	    throw new IllegalStateException();
 	}
@@ -94,17 +114,26 @@ public class Maze{
 
     */
     public int solve(){
+	int row = 0;
+	int col = 0;
+	for (int r=0; r<maze.length; r++){
+	    for (int c=0; c<maze[0].length; c++){
+			if(maze[r][c] == 'S'){
+				row = r;
+				col = c;
+				maze[r][c] = ' ';
+			}
+		}
+	}
 
-            //find the location of the S. 
-
-
-            //erase the S
-
-
-            //and start solving at the location of the s.
-
-            //return solve(???,???);
-			return 0;
+	for (int r=0; r<maze.length; r++){
+		String line = "";
+	    for (int c=0; c<maze[0].length; c++){
+			line += maze[r][c];
+		}
+		System.out.println(line);
+	}
+	return solve(row,col);
     }
 
 
@@ -148,7 +177,8 @@ public class Maze{
     
     public static void main(String[]args){
 	try{
-	Maze m1 = new Maze("data1.dat");
+	Maze m1 = new Maze("data1.txt");
+	m1.solve();
 	}
 	catch(FileNotFoundException e){
 	    System.out.println("There is no file");
