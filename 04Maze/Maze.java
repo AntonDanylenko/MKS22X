@@ -106,6 +106,18 @@ public class Maze{
     }
 
 
+	public String toString(){
+	String mazeView = "";
+	for (int r=0; r<maze.length; r++){
+		String line = "";
+	    for (int c=0; c<maze[0].length; c++){
+			line += maze[r][c];
+		}
+		mazeView = mazeView + line + "\n";
+	}
+	return mazeView;
+	}
+
 
     /*Wrapper Solve Function returns the helper function
 
@@ -126,14 +138,14 @@ public class Maze{
 		}
 	}
 
-	for (int r=0; r<maze.length; r++){
+	/*for (int r=0; r<maze.length; r++){
 		String line = "";
 	    for (int c=0; c<maze[0].length; c++){
 			line += maze[r][c];
 		}
 		System.out.println(line);
-	}
-	return solve(row,col);
+	}*/
+	return solve(row,col,0);
     }
 
 
@@ -156,7 +168,7 @@ public class Maze{
             Note: This is not required based on the algorithm, it is just nice visually to see.
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
+    private int solve(int row, int col, int numAts){ //you can add more parameters since this is private
 
 
         //automatic animation! You are welcome.
@@ -169,16 +181,41 @@ public class Maze{
         }
 
         //COMPLETE SOLVE
-
-        return -1; //so it compiles
+		if (row<0 || row>=maze.length ||
+			col<0 || col>=maze[0].length){
+			return -1;
+		}
+		if (maze[row][col] == 'E'){
+			return numAts;
+		}
+		if (maze[row][col] != ' '){
+			return -1;
+		}
+		maze[row][col] = '@';
+		int path = solve(row+1, col, numAts+1);
+		if (path==-1){
+			path = solve(row, col+1, numAts+1);
+		}
+		if (path==-1){
+			path = solve(row-1, col, numAts+1);
+		}
+		if (path==-1){
+			path = solve(row, col-1, numAts+1);
+		}
+		if (path==-1){
+			maze[row][col] = '.';
+			return -1;
+		}
+		return path;
     }
 
 
     
     public static void main(String[]args){
 	try{
-	Maze m1 = new Maze("data1.txt");
-	m1.solve();
+	Maze m1 = new Maze("data3.dat");
+	System.out.println(m1.solve());
+	System.out.println(m1);
 	}
 	catch(FileNotFoundException e){
 	    System.out.println("There is no file");
