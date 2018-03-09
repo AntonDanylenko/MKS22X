@@ -100,33 +100,82 @@ public class USACO{
 		    System.out.println(pasture[r][c] + " ");
 		}
 		System.out.println(" ");
-	    }
-	    System.out.println(numRows + ", " + numCols);*/
+	    }*/
+	    //System.out.println(steps);
 
-	    int R1 = reader.nextInt();
-	    int C1 = reader.nextInt();
-	    int R2 = reader.nextInt();
-	    int C2 = reader.nextInt();
+	    int R1 = reader.nextInt()-1;
+	    int C1 = reader.nextInt()-1;
+	    int R2 = reader.nextInt()-1;
+	    int C2 = reader.nextInt()-1;
 	    //System.out.println(R1 + ", " + C1 + ", " + R2 + ", " + C2);
 
+
+		//initialize board
 	    int[][] board = new int[numRows][numCols];
 	    board[R1][C1] = 1;
-	    for (int n=0; n<=steps; n++){
-		//gotta have two boards
+
+
+		//debugging
+	    /*for (int r=0; r<numRows; r++){
+		String line = "";
+		for (int c=0; c<numCols; c++){
+		    line = line + board[r][c] + " ";
+		}
+		System.out.println(line);
+	    }
+		System.out.println("");*/
+
+
+		//go through each step
+	    for (int n=0; n<steps; n++){
+		int[][] board2 = new int[numRows][numCols];
 		for (int r=0; r<numRows; r++){
 		    for (int c=0; c<numCols; c++){
-		        try{
-			    board[r][c] += board[r+1][c];
+		    if (r+1<numRows){
+			    board2[r][c] += board[r+1][c];
 			}
-			catch (IndexOutOfBoundsException e){
+		    if (c+1<numCols){
+			    board2[r][c] += board[r][c+1];
 			}
-			//repeat all four but onto the second board
+		    if (r>0){
+			    board2[r][c] += board[r-1][c];
+			}
+		    if (c>0){
+			    board2[r][c] += board[r][c-1];
+			}
+			if (pasture[r][c] == '*'){
+				board2[r][c] = 0;
+			}
 		    }
 		}
+	    for (int r=0; r<numRows; r++){
+		for (int c=0; c<numCols; c++){
+		    board[r][c] = board2[r][c];
+		}
+	    }
+		//debugging
+	    /*for (int r=0; r<numRows; r++){
+		String line = "";
+		for (int c=0; c<numCols; c++){
+		    line = line + board[r][c] + " ";
+		}
+		System.out.println(line);
+	    }
+		System.out.println("");*/
 	    }
 
-	    
-	    return 3;
+
+		//debugging
+	    /*for (int r=0; r<numRows; r++){
+		String line = "";
+		for (int c=0; c<numCols; c++){
+		    line = line + board[r][c] + " ";
+		}
+		System.out.println(line);
+	    }
+		System.out.println("");*/
+
+	    return board[R2][C2];
 	}
 	catch (FileNotFoundException e){
 	    System.out.println("Bad file");
@@ -137,7 +186,7 @@ public class USACO{
     
 
     public static void main(String[]args){
-        //System.out.println(bronze("makelake.in"));
-	System.out.println(silver("ctravel.in"));
+        //System.out.println(bronze("makelake8.in"));
+	System.out.println(silver("ctravel10.in"));
     }
 }

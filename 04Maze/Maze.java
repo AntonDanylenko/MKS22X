@@ -177,7 +177,7 @@ public class Maze{
             clearTerminal();
             System.out.println(this);
 
-            wait(20);
+            wait(50);
         }
 
         //COMPLETE SOLVE
@@ -213,7 +213,7 @@ public class Maze{
     
     public static void main(String[]args){
 	try{
-	Maze m1 = new Maze("data3.dat");
+	Maze m1 = new Maze("data2.dat");
 	System.out.println(m1.solve());
 	System.out.println(m1);
 	}
