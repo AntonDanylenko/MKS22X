@@ -1,12 +1,7 @@
 public class Quickselect{
-    private int[] unsorted;
-
-    public Quickselect(){
-	unsorted = new int[] {2,7,12,8,23,8,4,6};
-    }
 
     public void sort(){
-	int pivot = unsorted[(int)(Math.random()*unsorted.length)];
+	/*int pivot = unsorted[(int)(Math.random()*unsorted.length)];
 	System.out.println(pivot);
 	int small = 0;
 	int large = math.index - 1;
@@ -14,17 +9,39 @@ public class Quickselect{
 	    if (unsorted[n] > pivot){
 		swap(n, unsorted.length-1);
 	    }
-	}
+	}*/
     }
 
-    public void swap(int a, int b){
-	int temp = unsorted[b];
-	unsorted[b] = unsorted[a];
-	unsorted[a] = temp;
+    public static void swap(int[] data, int a, int b){
+	int temp = data[b];
+	data[b] = data[a];
+	data[a] = temp;
     }
+
+	public static int partition(int[] data, int start, int end){
+	int pivotInd = (int)(Math.random()*(end-start)) + start;
+	int pivotEl = data[pivotInd];
+	System.out.println(pivotInd + ", " + pivotEl);
+	for (int n=start; n<end; n++){
+	    if (data[n] < pivotEl){
+		swap(data, n, start);
+		start++;
+	    }
+		else if (data[n] > pivotEl){
+		swap(data, n, end);
+		end--;
+		}
+		String line = "";
+		for (int r=0; r<data.length; r++){
+			line = line + data[r] + ", ";
+		}
+		System.out.println(line);
+	}
+	return pivotEl;
+	}
 
     public static void main(String[]args){
-	Quickselect newarray = new Quickselect();
-	newarray.sort();
+	int[] unsorted = {2,7,12,8,23,8,4,6};
+	partition(unsorted, 0, unsorted.length -1);
     }
 }
