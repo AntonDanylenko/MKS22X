@@ -22,26 +22,48 @@ public class Quickselect{
 	int pivotInd = (int)(Math.random()*(end-start)) + start;
 	int pivotEl = data[pivotInd];
 	System.out.println(pivotInd + ", " + pivotEl);
-	for (int n=start; n<end; n++){
-	    if (data[n] < pivotEl){
+	swap(data, pivotInd, start);
+	pivotInd = start;
+	start++;
+	for (int n=start; n<=end; n++){
+	    while(data[end]>pivotEl){
+		end--;
+	    }
+	    if (data[n]>pivotEl && n<end){
+		swap(data, n, end);
+	    }
+	    //start = n-1;
+	    /*if (data[n] < pivotEl){
 		swap(data, n, start);
-		start++;
+		if (data[n] < pivotEl){
+		    start++;
+		}
 	    }
 		else if (data[n] > pivotEl){
 		swap(data, n, end);
+		if (data[n] > pivotEl){
 		end--;
 		}
-		String line = "";
-		for (int r=0; r<data.length; r++){
-			line = line + data[r] + ", ";
-		}
-		System.out.println(line);
+		}*/
+	    System.out.println(n + ", " + end);
+	    String line = "";
+	    for (int r=0; r<data.length; r++){
+		line = line + data[r] + ", ";
+	    }
+	    System.out.println(line);
 	}
-	return pivotEl;
+	swap(data, end, pivotInd);
+	String line = "";
+        for (int r=0; r<data.length; r++){
+	        line = line + data[r] + ", ";
+        }
+        System.out.println(line);
+	return pivotInd;
 	}
 
     public static void main(String[]args){
-	int[] unsorted = {2,7,12,8,23,8,4,6};
+	//int[] unsorted = {2,5,8,3,1,4,7,6};
+	int[] unsorted = {999,999,999,4,1,0,3,2,999,999,999};
 	partition(unsorted, 0, unsorted.length -1);
     }
 }
