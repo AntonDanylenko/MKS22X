@@ -10,9 +10,11 @@ public class Quick{
 
     public static void quickHelp(int[] data, int i, int j){
 	int v = partition(data, i, j);
-	if (j>i+1){
-	    quickHelp(data, i, v);
-	    quickHelp(data, v, j);
+	if (i!=v){
+	    quickHelp(data, i, v-1);
+	}
+	if (j!=v){
+	    quickHelp(data, v+1, j);
 	}
     }
 
@@ -68,8 +70,8 @@ public class Quick{
 	}
 
     public static void main(String[]args){
-	int[] unsorted = {2,5,8,3,1,4,7,6};
-	//int[] unsorted = {999,999,999,4,1,0,3,2,999,999,999};
+	//int[] unsorted = {2,5,8,3,1,4,7,6};
+	int[] unsorted = {999,999,999,4,1,0,3,2,999,999,999};
         quicksort(unsorted);
     }
 }
