@@ -1,6 +1,6 @@
 public class Quick{
     public static void quicksort(int[] data){
-	quickHelp(data, 0, data.length-1);
+	quickHelp2(data, 0, data.length-1);
 	String line = "";
         for (int r=0; r<data.length; r++){
 	        line = line + data[r] + ", ";
@@ -18,6 +18,15 @@ public class Quick{
 	}
     }
 
+    public static void quickHelp2(int[] data, int i, int j){
+	int[] v = part(data, i, j);
+	if (i<v[0]){
+	    quickHelp2(data, i, v[0]-1);
+	}
+	if (j>v[1]){
+	    quickHelp2(data, v[1]+1, j);
+	}
+    }
     
     public static int quickselect(int[] data, int k){
 	int j = data.length -1;
@@ -75,7 +84,7 @@ public class Quick{
 	System.out.println(pivot);
 	swap(data, i, start);
 	i = start+1;
-	while (i<end){
+	while (i<=end){
 	    if (data[i]==pivot){
 		i++;
 	    }
@@ -91,6 +100,7 @@ public class Quick{
 	}
 	int[] array = new int[2];
 	array[0] = start;
+	System.out.println("start: " + start + ", end: " + end);
 	array[1] = i;
 	String line = "";
         for (int r=0; r<data.length; r++){
@@ -104,6 +114,7 @@ public class Quick{
 	//int[] unsorted = {999,999,999,4,1,0,3,2,999,999,999};
 	int[] unsorted = {1,2,0,1,1,2,1,1,0,0,0,2,0,1,0,0,2,1,0,2,0,1,0,2,0,2};
 	//int[] unsorted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-        part(unsorted, 0, unsorted.length-1);
+	//int[] unsorted = {1,2,6,7,1,2,7,2,5,3,6,9,5,8,3,6,3,3,7,1,2,2,8,2,7,8,8};
+        quicksort(unsorted);
     }
 }
