@@ -32,30 +32,33 @@ public class Quick{
     }
     
     public static int quickselect(int[] data, int k){
+	if (k<0 || k>=data.length){
+		throw new IndexOutOfBoundsException();
+	}
 	int j = data.length -1;
 	int i = 0;
-	int v = partition(data, i, j);
+	int[] v = part(data, i, j);
 	String line = "";
         for (int r=0; r<data.length; r++){
 	        line = line + data[r] + ", ";
         }
 	System.out.println(line);
-	while(v!=k){
-	    if (v>k){
-		j = v;
+	while(!(v[0]<=k && v[1]>=k)){
+	    if (v[0]>k){
+		j = v[0];
 	    }
-	    else if(v<k){
-		i = v;
+	    else if(v[1]<k){
+		i = v[1];
 	    }
-	    v = partition(data, i, j);
-	    System.out.println(v);
+	    v = part(data, i, j);
+	    System.out.println(v[0] + ", " + v[1]);
 	    String line1 = "";
 	    for (int r=0; r<data.length; r++){
 	        line1 = line1 + data[r] + ", ";
 	    }
 	    System.out.println(line1);
 	}
-	return data[v];
+	return data[v[0]];
     }
 
     
@@ -123,12 +126,12 @@ public class Quick{
 	return array;
     }
     public static void main(String[]args){
-	//int[] unsorted = {2,5,8,3,1,4,7,6,0};
+	int[] unsorted = {2,5,8,3,1,4,7,6,0};
 	//int[] unsorted = {999,999,999,4,1,0,3,2,999,999,999};
 	//int[] unsorted = {1,2,0,1,1,2,1,1,0,0,0,2,0,1,0,0,2,1,0,2,0,1,0,2,0,2};
 	//int[] unsorted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	//int[] unsorted = {1,2,6,7,1,7,5,3,6,9,4,4,4,5,8,3,6,3,3,1,2,2,8,2,7,8};
 	//quicksort(unsorted);
-        System.out.println(quickselect(unsorted, 2));
+    System.out.println(quickselect(unsorted, 9));
     }
 }
