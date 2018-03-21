@@ -2,7 +2,7 @@ public class Merge{
     public static void mergesort(int[] data){
 	int[] temp = new int[data.length];
 	mergeHelp(data, temp, 0, data.length-1);
-	System.out.println(java.util.Arrays.toString(data));
+	//System.out.println(java.util.Arrays.toString(data));
     }
     
     public static void mergeHelp(int[] data, int[] temp, int start, int end){
