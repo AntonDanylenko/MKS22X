@@ -10,14 +10,17 @@ public class Merge{
 	}
 	else{
 	    mergeHelp(temp, data, start, (start+end)/2);
-	
+		//System.out.println("MH1: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
 	    mergeHelp(temp, data, (start+end)/2+1, end);
-	
-	    merge(data, temp, start, (start+end)/2-1, (start+end)/2, end);
+		//System.out.println("MH2: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
+	    merge(data, temp, start, (start+end)/2, (start+end)/2+1, end);
+		//System.out.println("MH3: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
+		//System.out.println(" ");
 	}
     }
 
     public static void merge(int[] data, int[] temp, int s1, int e1, int s2, int e2){
+	//System.out.println("Merge: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
 	int n=s1;
 	int m=s2;
         while(n<=e1 && m<=e2){
@@ -40,8 +43,14 @@ public class Merge{
 		data[r-s2+n] = temp[r];
 	    }
 	}
-	System.out.println(java.util.Arrays.toString(data));
-    }
+	//System.out.println("PostMerge: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
+	for (int r=s1; r<=e2; r++){
+		temp[r] = data[r];
+	}
+	for (int r=0; r<data.length; r++){
+		data[r] = temp[r];
+	}
+	}
 
     public static void main(String[]args){
 	//int[] temp = {-5,-4,-1,2,4,7,8,9,-3,-2,0,1,3,5,6,10};
@@ -53,7 +62,12 @@ public class Merge{
 
 	//int[] data0 = {4,2};
 	
-	int[] data0 = {2,5,1,3,9,10,4,6,7,8};
+	int[] data0 = {5,2,3,1,9,10,4,6,7,8};
+	//int[] data0 = {10,-10,2,6,1,-3,-7,9,-9,-9,-9,0,0,5,0};
+
+	long start = System.currentTimeMillis();
         mergesort(data0);
+	long end = System.currentTimeMillis();
+	System.out.println(end-start);
     }
 }
