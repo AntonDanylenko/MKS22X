@@ -1,6 +1,12 @@
 public class Merge{
     public static void mergesort(int[] data){
+	if (data.length == 0){
+	    return;
+	}
 	int[] temp = new int[data.length];
+	for (int n=0; n<data.length; n++){
+	    temp[n] = data[n];
+	}
 	mergeHelp(data, temp, 0, data.length-1);
 	//System.out.println(java.util.Arrays.toString(data));
     }
@@ -10,12 +16,12 @@ public class Merge{
 	}
 	else{
 	    mergeHelp(temp, data, start, (start+end)/2);
-		//System.out.println("MH1: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
+	    //System.out.println("MH1: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
 	    mergeHelp(temp, data, (start+end)/2+1, end);
-		//System.out.println("MH2: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
+	    //System.out.println("MH2: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
 	    merge(data, temp, start, (start+end)/2, (start+end)/2+1, end);
-		//System.out.println("MH3: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
-		//System.out.println(" ");
+	    //System.out.println("MH3: Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
+	    //System.out.println(" ");
 	}
     }
 
@@ -32,6 +38,7 @@ public class Merge{
 		data[n+m-s2] = temp[m];
 		m++;
 	    }
+	    //System.out.println("Merge(while): Data: " + java.util.Arrays.toString(data) + ", Temp: " + java.util.Arrays.toString(temp));
 	}
 	if(n<=e1){
 	    for (int r=n; r<=e1; r++){
@@ -47,12 +54,12 @@ public class Merge{
 	for (int r=s1; r<=e2; r++){
 		temp[r] = data[r];
 	}
-	for (int r=0; r<data.length; r++){
+	/*for (int r=0; r<data.length; r++){
 		data[r] = temp[r];
-	}
+		}*/
 	}
 
-    public static void main(String[]args){
+    /*public static void main(String[]args){
 	//int[] temp = {-5,-4,-1,2,4,7,8,9,-3,-2,0,1,3,5,6,10};
 
 	//int[] temp = {5,7,8,8,9,9,10,1,2,3,4,4,5,6};
@@ -69,5 +76,5 @@ public class Merge{
         mergesort(data0);
 	long end = System.currentTimeMillis();
 	System.out.println(end-start);
-    }
+	}*/
 }
