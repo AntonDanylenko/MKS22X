@@ -5,7 +5,7 @@ public class Quick{
         for (int r=0; r<data.length; r++){
 	        line = line + data[r] + ", ";
         }
-	System.out.println(line);
+	//System.out.println(line);
     }
 
     /*public static void quickHelp(int[] data, int i, int j){
@@ -42,7 +42,7 @@ public class Quick{
         for (int r=0; r<data.length; r++){
 	        line = line + data[r] + ", ";
         }
-	System.out.println(line);
+	//System.out.println(line);
 	while(!(v[0]<=k && v[1]>=k)){
 	    if (v[0]>k){
 		j = v[0];
@@ -51,12 +51,12 @@ public class Quick{
 		i = v[1];
 	    }
 	    v = part(data, i, j);
-	    System.out.println(v[0] + ", " + v[1]);
+	    /*System.out.println(v[0] + ", " + v[1]);
 	    String line1 = "";
 	    for (int r=0; r<data.length; r++){
 	        line1 = line1 + data[r] + ", ";
 	    }
-	    System.out.println(line1);
+	    System.out.println(line1);*/
 	}
 	return data[v[0]];
     }
