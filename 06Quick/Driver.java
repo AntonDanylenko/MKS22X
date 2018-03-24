@@ -60,17 +60,23 @@ public class Driver{
     int size =  Integer.parseInt(args[0]);
     int type =   Integer.parseInt(args[1]);
 
-    int [] start = makeArray(size,type);
-    int [] result = Arrays.copyOf(start,start.length);
-    Arrays.sort(result);
+	int [][] all = new int[10000][size];
+	for (int n=0; n<10000; n++){
+		all[n] = makeArray(size, type);
+	}
+	int [][] results = new int[10000][size];
+	for (int r=0; r<10000; r++){
+		results[r] = Arrays.copyOf(all[r], size);
+	}
+	for (int s=0; s<10000; s++){
+		Arrays.sort(results[s]);
+	}
     
     long startTime = System.currentTimeMillis();
-    Quick.quicksort(start);
+	for (int n=0; n<10000; n++){
+		Quick.quicksort(all[n]);
+	}
     long elapsedTime = System.currentTimeMillis() - startTime;
-    if(Arrays.equals(start,result)){
-      System.out.println(name(type)+" array, size:"+size+" "+elapsedTime/1000.0+"sec ");
-    }else{
-      System.out.println(" ERROR! "+name(type)+" array, size:"+size+"  ERROR!");
-    }
+    System.out.println(name(type)+" array, size:"+size+" "+elapsedTime/1000.0+"sec ");
   }
 }
