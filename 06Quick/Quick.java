@@ -22,6 +22,23 @@ public class Quick{
 	}
     }
     
+
+	public static void insertionSort(int[] data, int i, int j){
+		for (int n=i+1; n<=j; n++){
+			int r = n;
+			while (r>i && data[r]<data[r-1]){
+				swap(data, r, r-1);
+				r--;
+			}
+		}
+		String line = "";
+        for (int r=0; r<data.length; r++){
+	        line = line + data[r] + ", ";
+        }
+		System.out.println(line);
+	}
+
+
     public static int quickselect(int[] data, int k){
 	if (k<0 || k>=data.length){
 		throw new IndexOutOfBoundsException();
@@ -96,6 +113,6 @@ public class Quick{
 	//int[] unsorted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	//int[] unsorted = {1,2,6,7,1,7,5,3,6,9,4,4,4,5,8,3,6,3,3,1,2,2,8,2,7,8};
 	//quicksort(unsorted);
-    System.out.println(quickselect(unsorted, 9));
+    insertionSort(unsorted, 2, 7);
     }
 }
