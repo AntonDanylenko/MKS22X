@@ -55,6 +55,31 @@ public class Driver{
   }
 
   public static void main(String[]args){
+    /*if(args.length < 2)return;
+    
+    int size =  Integer.parseInt(args[0]);
+    int type =   Integer.parseInt(args[1]);
+
+	int [][] all = new int[10000][size];
+	for (int n=0; n<10000; n++){
+		all[n] = makeArray(size, type);
+	}
+	int [][] results = new int[10000][size];
+	for (int r=0; r<10000; r++){
+		results[r] = Arrays.copyOf(all[r], size);
+	}
+	for (int s=0; s<10000; s++){
+		Arrays.sort(results[s]);
+	}
+    
+    long startTime = System.currentTimeMillis();
+	for (int n=0; n<10000; n++){
+		Merge.mergesort(all[n]);
+	}
+    long elapsedTime = System.currentTimeMillis() - startTime;
+    System.out.println(name(type)+" array, size:"+size+" "+elapsedTime/1000.0+"sec ");*/
+
+
     if(args.length < 2)return;
     
     int size =  Integer.parseInt(args[0]);

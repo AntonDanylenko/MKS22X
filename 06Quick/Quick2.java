@@ -1,4 +1,4 @@
-public class Quick{
+public class Quick2{
     public static void quicksort(int[] data){
 	quickHelp(data, 0, data.length-1);
 	/*String line = "";
@@ -14,21 +14,11 @@ public class Quick{
 	//System.out.println("i: " + i + ",j: " + j);
 	if (i<v[0]){
 	    //System.out.println("i: " + i + ",j: " + (v[0]-1));
-		if (v[0]-i<100){
-			insertionSort(data, i, v[0]-1);
-		}
-		else{
-			quickHelp(data, i, v[0]-1);
-		}
+	    quickHelp(data, i, v[0]-1);
 	}
 	if (j>v[1]){
 	    //System.out.println("i: " + (v[1]+1) + ",j: " + j);
-		if (j-v[1]<100){
-			insertionSort(data, v[1]+1, j);
-		}
-		else{
-			quickHelp(data, v[1]+1, j);
-		}
+	    quickHelp(data, v[1]+1, j);
 	}
     }
     
@@ -41,11 +31,11 @@ public class Quick{
 				r--;
 			}
 		}
-		/*String line = "";
+		String line = "";
         for (int r=0; r<data.length; r++){
 	        line = line + data[r] + ", ";
         }
-		System.out.println(line);*/
+		System.out.println(line);
 	}
 
 
@@ -123,6 +113,6 @@ public class Quick{
 	//int[] unsorted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	//int[] unsorted = {1,2,6,7,1,7,5,3,6,9,4,4,4,5,8,3,6,3,3,1,2,2,8,2,7,8};
 	//quicksort(unsorted);
-    quicksort(unsorted);
+    insertionSort(unsorted, 2, 7);
     }
 }

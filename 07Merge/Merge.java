@@ -11,6 +11,29 @@ public class Merge{
 	//System.out.println(java.util.Arrays.toString(data));
     }
     
+
+	public static void swap(int[] data, int a, int b){
+	int temp = data[b];
+	data[b] = data[a];
+	data[a] = temp;
+    }
+
+	public static void insertionSort(int[] data, int i, int j){
+		for (int n=i+1; n<=j; n++){
+			int r = n;
+			while (r>i && data[r]<data[r-1]){
+				swap(data, r, r-1);
+				r--;
+			}
+		}
+		/*String line = "";
+        for (int r=0; r<data.length; r++){
+	        line = line + data[r] + ", ";
+        }
+		System.out.println(line);*/
+	}
+
+
     public static void mergeHelp(int[] data, int[] temp, int start, int end){
 	if(start==end){
 	}

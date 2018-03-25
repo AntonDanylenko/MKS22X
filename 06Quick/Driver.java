@@ -55,7 +55,7 @@ public class Driver{
   }
 
   public static void main(String[]args){
-    if(args.length < 2)return;
+    /*if(args.length < 2)return;
     
     int size =  Integer.parseInt(args[0]);
     int type =   Integer.parseInt(args[1]);
@@ -77,6 +77,33 @@ public class Driver{
 		Quick.quicksort(all[n]);
 	}
     long elapsedTime = System.currentTimeMillis() - startTime;
-    System.out.println(name(type)+" array, size:"+size+" "+elapsedTime/1000.0+"sec ");
+    System.out.println(name(type)+" array, size:"+size+" "+elapsedTime/1000.0+"sec ");*/
+
+	if(args.length < 2)return;
+    
+    int size =  Integer.parseInt(args[0]);
+    int type =   Integer.parseInt(args[1]);
+
+    int [] start = makeArray(size,type);
+    int [] start2 = Arrays.copyOf(start,start.length);
+    int [] result = Arrays.copyOf(start,start.length);
+    Arrays.sort(result);
+    
+    long startTime = System.currentTimeMillis();
+    Quick.quicksort(start);
+    long elapsedTime = System.currentTimeMillis() - startTime;
+    long startTime2 = System.currentTimeMillis();
+    Quick2.quicksort(start2);
+    long elapsedTime2 = System.currentTimeMillis() - startTime2;
+    if(Arrays.equals(start,result)){
+      System.out.println(name(type)+" array 1, size:"+size+" "+elapsedTime/1000.0+"sec ");
+    }else{
+      System.out.println(" ERROR! "+name(type)+" array, size:"+size+"  ERROR!");
+    }
+    if(Arrays.equals(start2,result)){
+      System.out.println(name(type)+" array 2, size:"+size+" "+elapsedTime2/1000.0+"sec ");
+    }else{
+      System.out.println(" ERROR! "+name(type)+" array, size:"+size+"  ERROR!");
+    }
   }
 }
