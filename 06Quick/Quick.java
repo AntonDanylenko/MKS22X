@@ -14,21 +14,11 @@ public class Quick{
 	//System.out.println("i: " + i + ",j: " + j);
 	if (i<v[0]){
 	    //System.out.println("i: " + i + ",j: " + (v[0]-1));
-		if (v[0]-i<100){
-			insertionSort(data, i, v[0]-1);
-		}
-		else{
-			quickHelp(data, i, v[0]-1);
-		}
+	    quickHelp(data, i, v[0]-1);
 	}
 	if (j>v[1]){
 	    //System.out.println("i: " + (v[1]+1) + ",j: " + j);
-		if (j-v[1]<100){
-			insertionSort(data, v[1]+1, j);
-		}
-		else{
-			quickHelp(data, v[1]+1, j);
-		}
+	    quickHelp(data, v[1]+1, j);
 	}
     }
     
