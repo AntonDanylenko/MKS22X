@@ -22,8 +22,12 @@ public class MyLinkedList{
 	private int getValue(){
 	    return data;
 	}
+
+	private void setValue(int value){
+	    data = value;
+	}
 	
-	private String toString(){
+	public String toString(){
 	    return data + "";
 	}
     }
@@ -32,19 +36,32 @@ public class MyLinkedList{
     private Node last;
     private int length;
 
-    public string toString(){
+    public MyLinkedList(int length){
+	
+    }
+    
+    public String toString(){
+	Node m = first;
+	String result = "[";
+	for (int n=0; n<length; n++){
+	    result = result + m.getValue() + ", ";
+	    m = m.getNext();
+	}
+	return result + "]";
     }
     
     public int get(int n){
+	Node m = first;
 	for (int r=0; r<n; r++){
-	    getNext();
+	    m = m.getNext();
 	}
-	return data;
+	return m.getValue();
     }
 	    
     public void set(int index,int value){
+	Node m = first;
 	get(index);
-	data = value;
+	m.setValue(value);
     }
 
     public int size(){
@@ -57,5 +74,12 @@ public class MyLinkedList{
     }
     
     public void remove(int index){
+    }
+
+
+    public static void main(String[]args){
+	MyLinkedList list = new MyLinkedList(4);
+	list.set(2,9);
+	System.out.println(list);
     }
 }
