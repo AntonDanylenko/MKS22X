@@ -27,4 +27,35 @@ public class MyLinkedList{
 	    return data + "";
 	}
     }
+
+    private Node first;
+    private Node last;
+    private int length;
+
+    public string toString(){
+    }
+    
+    public int get(int n){
+	for (int r=0; r<n; r++){
+	    getNext();
+	}
+	return data;
+    }
+	    
+    public void set(int index,int value){
+	get(index);
+	data = value;
+    }
+
+    public int size(){
+	return length;
+    }
+    
+    public void add(int index,int value){
+        get(index-1);
+	//??????
+    }
+    
+    public void remove(int index){
+    }
 }
