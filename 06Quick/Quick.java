@@ -1,6 +1,8 @@
 public class Quick{
     public static void quicksort(int[] data){
-	quickHelp(data, 0, data.length-1);
+	if (data.length != 0){
+	    quickHelp(data, 0, data.length-1);
+	}
 	/*String line = "";
         for (int r=0; r<data.length; r++){
 	        line = line + data[r] + ", ";
@@ -107,12 +109,18 @@ public class Quick{
 	return array;
     }
     public static void main(String[]args){
-	int[] unsorted = {2,5,8,3,1,4,7,6,0};
+	//int[] unsorted = {2,5,8,3,1,4,7,6,0};
 	//int[] unsorted = {999,999,999,4,1,0,3,2,999,999,999};
 	//int[] unsorted = {1,2,0,1,1,2,1,1,0,0,0,2,0,1,0,0,2,1,0,2,0,1,0,2,0,2};
 	//int[] unsorted = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	//int[] unsorted = {1,2,6,7,1,7,5,3,6,9,4,4,4,5,8,3,6,3,3,1,2,2,8,2,7,8};
+	int[] unsorted = {};
 	//quicksort(unsorted);
     quicksort(unsorted);
+	String line = "";
+        for (int r=0; r<unsorted.length; r++){
+	        line = line + unsorted[r] + ", ";
+        }
+	System.out.println(line);
     }
 }
