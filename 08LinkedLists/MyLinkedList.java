@@ -1,7 +1,11 @@
 public class MyLinkedList{
     private class Node{
 	private Node next, prev;
-	private int data;
+	private Integer data;
+
+	private Node(Integer value){
+	    data = value;
+	}
 
 	private Node getNext(){
 	    return next;
@@ -19,11 +23,11 @@ public class MyLinkedList{
 	    prev = thing;
 	}
 	
-	private int getValue(){
+	private Integer getValue(){
 	    return data;
 	}
 
-	private void setValue(int value){
+	private void setValue(Integer value){
 	    data = value;
 	}
 	
@@ -36,8 +40,7 @@ public class MyLinkedList{
     private Node last;
     private int length;
 
-    public MyLinkedList(int length){
-	
+    public MyLinkedList(){
     }
     
     public String toString(){
@@ -58,7 +61,7 @@ public class MyLinkedList{
 	return m.getValue();
     }
 	    
-    public void set(int index,int value){
+    public void set(int index,Integer value){
 	Node m = first;
 	get(index);
 	m.setValue(value);
@@ -67,10 +70,30 @@ public class MyLinkedList{
     public int size(){
 	return length;
     }
+
+    public boolean add(Integer value){
+	Node temp = new Node(value);
+	last.setNext(temp);
+	temp.setPrev(last);
+	last = temp;
+	return true;
+    }
     
-    public void add(int index,int value){
-        get(index-1);
-	//??????
+    public boolean add(int index,Integer value){
+	if (index<0 || index>length){
+	    return false;
+	}
+	if (index == 0){
+	    first = new Node(value);
+	    if (length == 0){
+		last = first;
+	    }
+	    length += 1; 
+	}
+	if (index == length){
+	    add(value);
+	}
+	return true;
     }
     
     public void remove(int index){
@@ -78,7 +101,7 @@ public class MyLinkedList{
 
 
     public static void main(String[]args){
-	MyLinkedList list = new MyLinkedList(4);
+	MyLinkedList list = new MyLinkedList();
 	list.set(2,9);
 	System.out.println(list);
     }
