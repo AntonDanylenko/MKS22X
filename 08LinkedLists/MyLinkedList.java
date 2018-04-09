@@ -114,6 +114,21 @@ public class MyLinkedList{
     }
     
     public void remove(int index){
+	if (index<0 || index>=length){
+	    return;
+	}
+	if (index == length){
+	    last = last.getPrev();
+	}
+	Node m = first;	
+	if (index == 0){
+	    first = m.getNext();
+	}
+	for (int r=0; r<index-1; r++){
+	    m = m.getNext();
+	}
+	m.setNext(m.getNext().getNext());
+	length--;
     }
 
 
@@ -124,6 +139,8 @@ public class MyLinkedList{
 	list.add(1, Integer.valueOf(3));
 	System.out.println(list);
 	list.set(0, Integer.valueOf(8));
+	System.out.println(list);
+	list.remove(0);
 	System.out.println(list);
     }
 }
