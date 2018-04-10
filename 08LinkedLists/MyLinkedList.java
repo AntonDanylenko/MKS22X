@@ -55,10 +55,16 @@ public class MyLinkedList{
 	}
 	return result + m.getValue() + "]";
     }
+
+    public void clear(){
+	first = null;
+	last = null;
+	length = 0;
+    }
     
     public Integer get(int n){
 	if(n>=length || n<0){
-	    throw new IndexOutOfBoundsException();
+	    return -1;
 	}
 	Node m = first;
 	for (int r=0; r<n; r++){
@@ -68,6 +74,9 @@ public class MyLinkedList{
     }
 	    
     public Integer set(int index,Integer value){
+	if(index>=length || index<0){
+	    return -1;
+	}
 	Node m = first;
         for (int r=0; r<index; r++){
 	    m = m.getNext();
@@ -79,6 +88,17 @@ public class MyLinkedList{
 
     public int size(){
 	return length;
+    }
+
+    public int indexOf(Integer value){
+	Node m = first;
+        for (int n=0; n<length; n++){
+	    if (m.getValue().equals(value)){
+		return n;
+	    }
+	    m = m.getNext();
+	}
+	return -1;
     }
 
     public boolean add(Integer value){
@@ -112,23 +132,42 @@ public class MyLinkedList{
 	}
 	return true;
     }
+
+    public boolean remove(Integer value){
+    }
     
-    public void remove(int index){
+    public Integer remove(int index){
 	if (index<0 || index>=length){
-	    return;
-	}
-	if (index == length){
-	    last = last.getPrev();
+	    return -1;
 	}
 	Node m = first;	
+	if (length == 1){
+	    Integer old = m.getValue();
+	    first = null;
+	    last = null;
+	    length=0;
+	    return old;
+	}
+	if (index == length){
+	    Integer old = last.getValue();
+	    last = last.getPrev();
+	    length--;
+	    return old;
+	}
 	if (index == 0){
+	    Integer old = m.getValue();
 	    first = m.getNext();
+	    length--;
+	    return old;
 	}
 	for (int r=0; r<index-1; r++){
 	    m = m.getNext();
 	}
+	Integer old = m.getNext().getValue();
 	m.setNext(m.getNext().getNext());
+	m.getNext().setPrev(m);
 	length--;
+	return old;
     }
 
 
@@ -142,5 +181,10 @@ public class MyLinkedList{
 	System.out.println(list);
 	list.remove(0);
 	System.out.println(list);
+	list.add(Integer.valueOf(2));
+	list.add(Integer.valueOf(5));
+	System.out.println(list);
+	System.out.println(list.indexOf(Integer.valueOf(2)));
+	System.out.println(list.indexOf(Integer.valueOf(5)));
     }
 }
