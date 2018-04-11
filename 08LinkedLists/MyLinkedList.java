@@ -134,6 +134,30 @@ public class MyLinkedList{
     }
 
     public boolean remove(Integer value){
+	Node m = first;
+	if (m.getValue().equals(value)){
+        first = m.getNext();
+        length--;
+        return true;
+    }
+    m = m.getNext();
+    for (int n=1; n<length-1; n++){
+	    if (m.getValue().equals(value)){
+            m.getPrev().setNext(m.getNext());
+            m.getNext().setPrev(m.getPrev());
+            length--;
+		return true;
+	    }
+	    m = m.getNext();
+	}
+	//System.out.println(m.getValue());
+    if (m.getValue().equals(value)){
+        //System.out.println(m.getValue());
+        last = m.getPrev();
+        length--;
+        return true;
+    }
+	return false;
     }
     
     public Integer remove(int index){
@@ -148,7 +172,7 @@ public class MyLinkedList{
 	    length=0;
 	    return old;
 	}
-	if (index == length){
+	if (index == length-1){
 	    Integer old = last.getValue();
 	    last = last.getPrev();
 	    length--;
@@ -184,7 +208,11 @@ public class MyLinkedList{
 	list.add(Integer.valueOf(2));
 	list.add(Integer.valueOf(5));
 	System.out.println(list);
-	System.out.println(list.indexOf(Integer.valueOf(2)));
-	System.out.println(list.indexOf(Integer.valueOf(5)));
+	list.remove(2);
+	System.out.println(list);
+	//System.out.println(list.indexOf(Integer.valueOf(2)));
+	//System.out.println(list.indexOf(Integer.valueOf(5)));
+    //list.remove(Integer.valueOf(3));
+	//System.out.println(list);
     }
 }
