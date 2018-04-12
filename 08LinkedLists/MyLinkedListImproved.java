@@ -1,4 +1,6 @@
-public class MyLinkedListImproved<T>{
+import java.util.Iterator;
+
+public class MyLinkedListImproved<T> implements Iterator<T>{
     private class Node{
 	private Node next, prev;
 	private T data;
@@ -42,7 +44,31 @@ public class MyLinkedListImproved<T>{
 
     public MyLinkedListImproved(){
     }
-    
+
+    public Iterator<T> iterator(){
+	return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements Iterator<T>{
+	private int cursor;
+
+	public LinkedListIterator(){
+	    this.cursor = MyLinkedListImproved.this.first;
+	}
+
+	public boolean hasNext(){
+	    return cursor < length;
+	}
+
+	public T next(){
+	    if(this.hasNext()){
+		int current = cursor;
+		cursor++;
+		return current;
+	    }
+	    System.exit(0);
+        }
+	
     public String toString(){
 	if (length<1){
 	    return "[]";
@@ -196,12 +222,12 @@ public class MyLinkedListImproved<T>{
 
 
     public static void main(String[]args){
-	MyLinkedList list = new MyLinkedList();
+	MyLinkedListImproved list = new MyLinkedListImproved();
 	//System.out.println(list.get(0));
-	list.add(Integer.valueOf(9));
-	list.add(1, Integer.valueOf(3));
+	list.add("aaa");
+	list.add(1, "bbb");
 	System.out.println(list);
-	list.set(0, Integer.valueOf(8));
+	/*list.set(0, Integer.valueOf(8));
 	System.out.println(list);
 	list.remove(0);
 	System.out.println(list);
@@ -209,7 +235,7 @@ public class MyLinkedListImproved<T>{
 	list.add(Integer.valueOf(5));
 	System.out.println(list);
 	list.remove(2);
-	System.out.println(list);
+	System.out.println(list);*/
 	//System.out.println(list.indexOf(Integer.valueOf(2)));
 	//System.out.println(list.indexOf(Integer.valueOf(5)));
     //list.remove(Integer.valueOf(3));
