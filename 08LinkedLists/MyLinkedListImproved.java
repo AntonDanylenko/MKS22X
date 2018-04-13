@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class MyLinkedListImproved<T> implements Iterator<T>{
+public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T>{
     private class Node{
 	private Node next, prev;
 	private T data;
@@ -46,28 +46,34 @@ public class MyLinkedListImproved<T> implements Iterator<T>{
     }
 
     public Iterator<T> iterator(){
-	return new LinkedListIterator();
+	return new LinkedListIterator(first);
     }
 
     private class LinkedListIterator implements Iterator<T>{
-	private int cursor;
+        private Node current;
 
-	public LinkedListIterator(){
-	    this.cursor = MyLinkedListImproved.this.first;
+	public LinkedListIterator(Node node){
+	    current = node;
 	}
 
 	public boolean hasNext(){
-	    return cursor < length;
+	    return current.getNext() != null;
 	}
 
 	public T next(){
-	    if(this.hasNext()){
-		int current = cursor;
-		cursor++;
-		return current;
+	    if(hasNext()){
+		current = current.getNext();
 	    }
-	    System.exit(0);
+	    else{
+		System.exit(0);
+	    }
+	    return current.getValue();
         }
+
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
+    }
 	
     public String toString(){
 	if (length<1){
@@ -220,25 +226,44 @@ public class MyLinkedListImproved<T> implements Iterator<T>{
 	return old;
     }
 
+    public int max(){
+	if(length == 0){
+	    return -1;
+	}
+	int max = 0;
+	for(T n: this){
+	    //System.out.println(n.compareTo(get(max)));
+	    if (n.compareTo(get(max))>0){
+		max = indexOf(n);
+	    }
+	}
+	return max;
+    }
 
+    public int min(){
+	if(length == 0){
+	    return -1;
+	}
+	int min = 0;
+	int count = 0;
+	for(T n: this){
+	    //System.out.println(n.compareTo(get(min)));
+	    if (n.compareTo(get(min))<0){
+		min = count;
+	    }
+	    count++;
+	}
+	return min;
+    }
+    
     public static void main(String[]args){
-	MyLinkedListImproved list = new MyLinkedListImproved();
+	MyLinkedListImproved<String> list = new MyLinkedListImproved<String>();
 	//System.out.println(list.get(0));
 	list.add("aaa");
 	list.add(1, "bbb");
+	list.add("ccc");
 	System.out.println(list);
-	/*list.set(0, Integer.valueOf(8));
-	System.out.println(list);
-	list.remove(0);
-	System.out.println(list);
-	list.add(Integer.valueOf(2));
-	list.add(Integer.valueOf(5));
-	System.out.println(list);
-	list.remove(2);
-	System.out.println(list);*/
-	//System.out.println(list.indexOf(Integer.valueOf(2)));
-	//System.out.println(list.indexOf(Integer.valueOf(5)));
-    //list.remove(Integer.valueOf(3));
-	//System.out.println(list);
+        System.out.println(list.max());
+        System.out.println(list.min());
     }
 }
