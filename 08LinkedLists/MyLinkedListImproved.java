@@ -45,10 +45,12 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     public MyLinkedListImproved(){
     }
 
+	//ITERATOR()
     public Iterator<T> iterator(){
 	return new LinkedListIterator(first);
     }
 
+	//ITERATOR()
     private class LinkedListIterator implements Iterator<T>{
         private Node current;
 
@@ -75,6 +77,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
     }
 	
+	//TOSTRING()
     public String toString(){
 	if (length<1){
 	    return "[]";
@@ -88,12 +91,14 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return result + m.getValue() + "]";
     }
 
+	//CLEAR()
     public void clear(){
 	first = null;
 	last = null;
 	length = 0;
     }
     
+	//GET()
     public T get(int n){
 	if(n>=length || n<0){
 	    throw new IndexOutOfBoundsException();
@@ -104,7 +109,8 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	}
 	return m.getValue();
     }
-	    
+	
+	//SET()
     public T set(int index,T value){
 	if(index>=length || index<0){
 	    throw new IndexOutOfBoundsException();
@@ -118,10 +124,12 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return old;
     }
 
+	//SIZE()
     public int size(){
 	return length;
     }
 
+	//INDEXOF()
     public int indexOf(T value){
 	Node m = first;
         for (int n=0; n<length; n++){
@@ -133,6 +141,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return -1;
     }
 
+	//ADD()
     public boolean add(T value){
 	Node temp = new Node(value);
 	if(length == 0){
@@ -148,6 +157,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return true;
     }
     
+	//ADD()
     public boolean add(int index,T value){
 	if (index<0 || index>length){
 	    return false;
@@ -165,6 +175,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return true;
     }
 
+	//REMOVE()
     public boolean remove(T value){
 	Node m = first;
 	if (m.getValue().equals(value)){
@@ -182,9 +193,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	    }
 	    m = m.getNext();
 	}
-	//System.out.println(m.getValue());
     if (m.getValue().equals(value)){
-        //System.out.println(m.getValue());
         last = m.getPrev();
         length--;
         return true;
@@ -192,6 +201,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return false;
     }
     
+	//REMOVE()
     public T remove(int index){
 	if (index<0 || index>=length){
 	    throw new IndexOutOfBoundsException();
@@ -226,6 +236,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return old;
     }
 
+	//MAX()
     public int max(){
 	if(length == 0){
 	    return -1;
@@ -240,6 +251,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return max;
     }
 
+	//MIN()
     public int min(){
 	if(length == 0){
 	    return -1;
@@ -256,6 +268,7 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return min;
     }
     
+	//EXTEND()
     public void extend(MyLinkedListImproved<T> other){
         this.last.setNext(other.first);
         other.first.setPrev(this.last);
