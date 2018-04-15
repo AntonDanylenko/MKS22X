@@ -256,6 +256,14 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return min;
     }
     
+    public void extend(MyLinkedListImproved<T> other){
+        this.last.setNext(other.first);
+        other.first.setPrev(this.last);
+        this.last = other.last;
+        length += other.length;
+        other.clear();
+    }
+
     public static void main(String[]args){
 	MyLinkedListImproved<String> list = new MyLinkedListImproved<String>();
 	//System.out.println(list.get(0));
@@ -265,5 +273,15 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	System.out.println(list);
         System.out.println(list.max());
         System.out.println(list.min());
+	MyLinkedListImproved<String> list2 = new MyLinkedListImproved<String>();
+    list2.add("www");
+    list2.add("xxx");
+    list2.add("yyy");
+    list2.add("zzz");
+    list2.add("LLL");
+    System.out.println(list2);
+    list.extend(list2);
+    System.out.println(list);
+    System.out.println(list2);
     }
 }
