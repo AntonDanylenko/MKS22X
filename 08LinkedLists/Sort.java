@@ -1,12 +1,35 @@
 public class Sort{
     public static void radixsort(MyLinkedListImproved<Integer> data){
-        //System.out.println((data.get(0) + "").length());
-        for (int n=0; n<(data.get(0) + "").length(); n++){
-            digitsort(data, n);
+        MyLinkedListImproved<Integer> negatives = new MyLinkedListImproved<Integer>();
+        MyLinkedListImproved<Integer> positives = new MyLinkedListImproved<Integer>();
+        for (int r=0; r<data.size(); r++){
+            if (data.get(r) < 0){
+                negatives.add(-data.get(r));
+            }
+            else{
+                positives.add(data.get(r));
+            }
         }
+        int numDigits = (data.get(0) + "").length();
+        if ((data.get(0) + "").charAt(0) == '-'){
+            numDigits--;
+        }
+        //System.out.println(numDigits);
+        for (int n=0; n<numDigits; n++){
+            digitsort(negatives, n, '-');
+        }
+        for (int r=0; r<negatives.size(); r++){
+            negatives.set(r, -negatives.get(r));
+        }
+        for (int n=0; n<numDigits; n++){
+            digitsort(positives, n, '+');
+        }
+        data.clear();
+        data.extend(negatives);
+        data.extend(positives);
     }
 
-    public static void digitsort(MyLinkedListImproved<Integer> data, int digit){
+    public static void digitsort(MyLinkedListImproved<Integer> data, int digit, char sign){
         MyLinkedListImproved<Integer> zer = new MyLinkedListImproved<Integer>();
         MyLinkedListImproved<Integer> one = new MyLinkedListImproved<Integer>();
         MyLinkedListImproved<Integer> two = new MyLinkedListImproved<Integer>();
@@ -17,7 +40,6 @@ public class Sort{
         MyLinkedListImproved<Integer> sev = new MyLinkedListImproved<Integer>();
         MyLinkedListImproved<Integer> eig = new MyLinkedListImproved<Integer>();
         MyLinkedListImproved<Integer> nin = new MyLinkedListImproved<Integer>();
-        //MyLinkedListImproved<Integer>[] group = new MyLinkedListImproved<Integer>[]{zer, one, two, thr, fou, fiv, six, sev, eig, nin};
         @SuppressWarnings("unchecked") MyLinkedListImproved<Integer>[] group = new MyLinkedListImproved[10];
         group[0] = zer;
         group[1] = one;
@@ -38,8 +60,15 @@ public class Sort{
         }
 
         MyLinkedListImproved<Integer> result = new MyLinkedListImproved<Integer>();
-        for (int r=0; r<10; r++){
-            result.extend(group[r]);
+        if (sign == '+'){
+            for (int r=0; r<10; r++){
+                result.extend(group[r]);
+            }
+        }
+        else{
+            for (int r=9; r>=0; r--){
+                result.extend(group[r]);
+            }
         }
         //System.out.println(result);
         //System.out.println(data);
@@ -50,12 +79,19 @@ public class Sort{
 
     public static void main(String[]args){
 	MyLinkedListImproved<Integer> list = new MyLinkedListImproved<Integer>();
-	list.add(745);
+	list.add(-745);
 	list.add(523);
-	list.add(109);
+	list.add(-109);
 	list.add(222);
-	list.add(931);
+	list.add(-931);
 	list.add(233);
+	list.add(745);
+	list.add(023);
+	list.add(000);
+	list.add(109);
+	list.add(-222);
+	list.add(931);
+	list.add(-233);
 	System.out.println(list + "ccc");
     radixsort(list);
     System.out.println(list + "bbb");
