@@ -1,5 +1,13 @@
 public class Sort{
     public static void radixsort(MyLinkedListImproved<Integer> data){
+        int numDigits = (data.get(0) + "").length();
+        //System.out.println(numDigits);
+        for (int n=0; n<numDigits; n++){
+            digitsort(data, n, '+');
+        }
+    }
+
+	public static void radixsortIncludingNegatives(MyLinkedListImproved<Integer> data){ 
         MyLinkedListImproved<Integer> negatives = new MyLinkedListImproved<Integer>();
         MyLinkedListImproved<Integer> positives = new MyLinkedListImproved<Integer>();
         for (int r=0; r<data.size(); r++){
@@ -26,7 +34,7 @@ public class Sort{
         }
         data.clear();
         data.extend(negatives);
-        data.extend(positives);
+        data.extend(positives); 
     }
 
     public static void digitsort(MyLinkedListImproved<Integer> data, int digit, char sign){
@@ -79,19 +87,19 @@ public class Sort{
 
     public static void main(String[]args){
 	MyLinkedListImproved<Integer> list = new MyLinkedListImproved<Integer>();
-	list.add(-745);
+	//list.add(-745);
 	list.add(523);
-	list.add(-109);
+	//list.add(-109);
 	list.add(222);
-	list.add(-931);
+	//list.add(-931);
 	list.add(233);
 	list.add(745);
 	list.add(023);
 	list.add(000);
 	list.add(109);
-	list.add(-222);
+	//list.add(-222);
 	list.add(931);
-	list.add(-233);
+	//list.add(-233);
 	System.out.println(list + "ccc");
     radixsort(list);
     System.out.println(list + "bbb");
