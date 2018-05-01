@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class MyDeque<E>{
 	private E[] deque;
@@ -37,6 +38,7 @@ public class MyDeque<E>{
 			for (int r=front; r<deque.length; r++){
 				temp[temp.length - deque.length + r] = deque[r];
 			}
+			front += deque.length;
 		}
 		else{
 			for (int n=front; n<=back; n++){
@@ -44,6 +46,8 @@ public class MyDeque<E>{
 			}
 		}
 		deque = temp;
+		System.out.println("frrront =" + front + ", back =" + back);
+		System.out.println(Arrays.toString(deque));
 	}
 
 	public void addFirst(E element){
@@ -59,15 +63,15 @@ public class MyDeque<E>{
 		}
 		else{
 			if (front<1){
-				if (!deque[deque.length-1].equals(null)){
+				if (deque[deque.length-1] != null){
 					doubleCap();
 				}
 				deque[deque.length-1] = element;
-				front = size()-1;
+				front = deque.length-1;
 				size++;
 			}
 			else{
-				if (!deque[front-1].equals(null)){
+				if (deque[front-1]!=null){
 					doubleCap();
 				}
 				deque[front-1] = element;
@@ -90,11 +94,14 @@ public class MyDeque<E>{
 		}
 		else{
 			if (back+1==deque.length){
-				if (!deque[0].equals(null)){
+				if (deque[0]!=null){
 					doubleCap();
+					deque[back+1] = element;
 				}
-				deque[0] = element;
-				back = 0;
+				else{
+				    deque[0] = element;
+				    back = 0;
+				}
 				size++;
 			}
 			else{
@@ -108,16 +115,63 @@ public class MyDeque<E>{
 			System.out.println("front =" + front + ", back =" + back);
 		}
 	}
-	
+
+
+    public E removeFirst(){
+	if (size()==0){
+	    throw new NoSuchElementException();
+	}
+	else{
+	    E value = deque[front];
+	    deque[front] = null;
+	    front++;
+	    size--;
+	    return value;
+	}
+    }
+
+    public E removeLast(){
+	if (size()==0){
+	    throw new NoSuchElementException();
+	}
+	else{
+	    E value = deque[back];
+	    deque[back] = null;
+	    back--;
+	    size--;
+	    return value;
+	}
+    }
+
+
+    
 	public static void main(String[]args){
 		MyDeque<Integer> thing = new MyDeque<Integer>();
 		System.out.println(thing);
 		System.out.println(thing.size());
-		thing.addFirst(7);
+	    thing.addLast(7);
 		System.out.println(thing);
 		thing.addLast(5);
 		System.out.println(thing);
-		thing.addFirst(3);
+		thing.addLast(3);
 		System.out.println(thing);
+		thing.addLast(9);
+		System.out.println(thing);
+		thing.addLast(11);
+		System.out.println(thing);
+		thing.addLast(2);
+		System.out.println(thing);
+		thing.addLast(4);
+		System.out.println(thing);
+		thing.addLast(6);
+		System.out.println(thing);
+		thing.addLast(8);
+		System.out.println(thing);
+		thing.addLast(10);
+		System.out.println(thing);
+		thing.addLast(1);
+		System.out.println(thing);
+		thing.addFirst(12);
+		System.out.println(thing);		
 	}
 }
