@@ -97,6 +97,7 @@ public class MyDeque<E>{
 				if (deque[0]!=null){
 					doubleCap();
 					deque[back+1] = element;
+					back++;
 				}
 				else{
 				    deque[0] = element;
@@ -122,9 +123,15 @@ public class MyDeque<E>{
 	    throw new NoSuchElementException();
 	}
 	else{
+	    System.out.println("First= " + front);
 	    E value = deque[front];
 	    deque[front] = null;
-	    front++;
+	    if (front == deque.length-1){
+		front = 0;
+	    }
+	    else{
+		front++;
+	    }
 	    size--;
 	    return value;
 	}
@@ -135,15 +142,33 @@ public class MyDeque<E>{
 	    throw new NoSuchElementException();
 	}
 	else{
+	    System.out.println("Last= " + back);
 	    E value = deque[back];
 	    deque[back] = null;
-	    back--;
+	    if (back == 0){
+		back = deque.length-1;
+	    }
+	    else{
+		back--;
+	    }
 	    size--;
 	    return value;
 	}
     }
 
+    public E getFirst(){
+	if (size()==0){
+	    throw new NoSuchElementException();
+	}
+	return deque[front];
+    }
 
+    public E getLast(){
+	if (size()==0){
+	    throw new NoSuchElementException();
+	}
+	return deque[back];
+    }
     
 	public static void main(String[]args){
 		MyDeque<Integer> thing = new MyDeque<Integer>();
@@ -172,6 +197,10 @@ public class MyDeque<E>{
 		thing.addLast(1);
 		System.out.println(thing);
 		thing.addFirst(12);
-		System.out.println(thing);		
+		System.out.println(thing);
+		thing.removeFirst();
+		System.out.println(thing);
+		thing.removeLast();
+		System.out.println(thing);
 	}
 }
