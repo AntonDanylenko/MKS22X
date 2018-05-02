@@ -12,7 +12,7 @@ public class ExpressionTree{
       else{
 	  result = "(" +  getLeft().toString() + " " + getOp() + " " + getRight().toString() + ")";
       }
-    return result;
+      return result;
   }
   
   /*return the expression as a postfix notation string without parenthesis*/
@@ -23,17 +23,23 @@ public class ExpressionTree{
 	  result+=getValue();
       }
       else{
-	  result = result + " " + getLeft().toStringPostfix() + " " + getRight().toStringPostfix() + " " + getOp();
+	  result = getLeft().toStringPostfix() + " " + getRight().toStringPostfix() + " " + getOp();
       }
-    return result;
+      return result;
   }
   
   /*return the expression as a prefix notation string without parenthesis*/
   /* The sample tree would be: "+ 3 * 2 10"     */
   
   public String toStringPrefix(){
-    /*you are to write this method*/
-    return "";
+      String result = "";
+      if (isValue()){
+	  result+=getValue();
+      }
+      else{
+	  result = getOp() + " " + getLeft().toStringPrefix() + " " + getRight().toStringPrefix();
+      }
+      return result;
   }
   
   
