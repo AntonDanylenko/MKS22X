@@ -116,20 +116,43 @@ public class MyLinkedList{
 	return true;
     }
     
+    private Node getNode(int index){
+	if(index < 0 || index >= length){
+	    return null;
+	}
+	Node m = first;
+        for(int i = 0; i < index; i++){
+            m = m.getNext();
+        }
+        return m;
+    }
+
     public boolean add(int index,Integer value){
 	if (index<0 || index>length){
 	    return false;
 	}
 	if (index == 0){
-	    first = new Node(value);
+	    Node temp = new Node(value);
+		temp.setNext(first);
+		first.setPrev(temp);
+		first = temp;
 	    if (length == 0){
 		last = first;
 	    }
-	    length++; 
+	    length++;
+		return true;
 	}
-	if (index == length){
+	else if (index == length){
 	    add(value);
+		return true;
 	}
+	Node m = first;
+	Node temp = new Node(value);
+	temp.setNext(getNode(index));
+	temp.setPrev(getNode(index-1));
+	getNode(index-1).setNext(temp);
+	getNode(index).setPrev(temp);
+	length++;
 	return true;
     }
 
@@ -205,6 +228,12 @@ public class MyLinkedList{
 	System.out.println(list);
 	list.remove(0);
 	System.out.println(list);
+	list.add(Integer.valueOf(2));
+	list.add(Integer.valueOf(5));
+	list.add(Integer.valueOf(2));
+	list.add(Integer.valueOf(5));
+	list.add(3, Integer.valueOf(2));
+	list.add(3, Integer.valueOf(5));
 	list.add(Integer.valueOf(2));
 	list.add(Integer.valueOf(5));
 	System.out.println(list);
