@@ -99,8 +99,38 @@ public class MyHeap{
 	}
 	
     public String remove(){
-	return "";
+	String element = data[0];
+	//data[0] = data[size-1]; SWITCH THEN PUSH UP
+	int index = 0;
+	int rows = (int) (Math.log(size) / Math.log(2));
+	for (int n=0; n<rows-1; n++){
+	    if (data[2*index+1].compareTo(data[2*index+2])<0 ^ max){
+	        data[index] = data[2*index+1];
+	        index = 2*index+1;
+	    }
+	    else{
+	        data[index] = data[2*index+2];
+		index = 2*index+2;
+	    }
+	}
+	if (2*index+2<size){
+	    if (data[2*index+1].compareTo(data[2*index+2])<0 ^ max){
+	        data[index] = data[2*index+1];
+	        index = 2*index+1;
+	    }
+	    else{
+	        data[index] = data[2*index+2];
+		index = 2*index+2;
+	    }
+	}
+	else if (2*index+1<size){
+	    data[index] = data[2*index+1];
+	    index = 2*index+1;
+	}
+	data[index]=null;
+	return element;
     }
+	
 
     public String peek(){
 	return "";
@@ -122,6 +152,8 @@ public class MyHeap{
 		heap.add("g");
 		heap.add("f");
 		heap.add("a");
+		System.out.println(heap);
+		heap.remove();
 		System.out.println(heap);
 	}
 }
