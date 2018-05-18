@@ -137,7 +137,7 @@ public class MyHeap{
     }
 
     public int size(){
-	return -1;
+	return size;
     }
 	
 	public static void main(String[]args){
