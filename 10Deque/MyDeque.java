@@ -46,20 +46,20 @@ public class MyDeque<E>{
 			}
 		}
 		deque = temp;
-		System.out.println("frrront =" + front + ", back =" + back);
-		System.out.println(Arrays.toString(deque));
+		//System.out.println("frrront =" + front + ", back =" + back);
+		//System.out.println(Arrays.toString(deque));
 	}
 
 	public void addFirst(E element){
 		if(element == null){
-		    System.out.println("threw exception");
+		    //System.out.println("threw exception");
 			throw new NullPointerException();
 		}
 		if (size()==0){
-		    System.out.println("front = null");
+		    //System.out.println("front = null");
 			deque[front] = element;
 			size++;
-			System.out.println("front =" + front + ", back =" + back);
+			//System.out.println("front =" + front + ", back =" + back);
 		}
 		else{
 			if (front<1){
@@ -78,7 +78,7 @@ public class MyDeque<E>{
 				front--;
 				size++;
 			}
-			System.out.println("front =" + front + ", back =" + back);
+			//System.out.println("front =" + front + ", back =" + back);
 		}
 	}
 
@@ -86,11 +86,11 @@ public class MyDeque<E>{
 		if(element == null){
 			throw new NullPointerException();
 		}
-		System.out.println(size());
+		//System.out.println(size());
 		if (size()==0){
 			deque[back] = element;
 			size++;
-			System.out.println("front =" + front + ", back =" + back);
+			//System.out.println("front =" + front + ", back =" + back);
 		}
 		else{
 			if (back+1==deque.length){
@@ -113,7 +113,7 @@ public class MyDeque<E>{
 				back++;
 				size++;
 			}
-			System.out.println("front =" + front + ", back =" + back);
+			//System.out.println("front =" + front + ", back =" + back);
 		}
 	}
 
@@ -123,7 +123,7 @@ public class MyDeque<E>{
 	    throw new NoSuchElementException();
 	}
 	else{
-	    System.out.println("First= " + front);
+	    //System.out.println("First= " + front);
 	    E value = deque[front];
 	    deque[front] = null;
 	    if (front == deque.length-1){
@@ -142,7 +142,7 @@ public class MyDeque<E>{
 	    throw new NoSuchElementException();
 	}
 	else{
-	    System.out.println("Last= " + back);
+	    //System.out.println("Last= " + back);
 	    E value = deque[back];
 	    deque[back] = null;
 	    if (back == 0){
