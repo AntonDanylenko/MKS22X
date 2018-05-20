@@ -101,7 +101,7 @@ public class MyHeap<T extends Comparable<T>>{
 			index = 2*index+2;
 	    }
 	}
-	if (2*index+2==size && data[index].compareTo(data[2*index+1])<0){
+	if (2*index+2==size && (data[index].compareTo(data[2*index+1])>0 ^ max)){
 		swap(index, 2*index+1);
 	}
 	return element;
@@ -118,10 +118,10 @@ public class MyHeap<T extends Comparable<T>>{
 	
 	@SuppressWarnings("unchecked")
 	public static void main(String[]args){
-		MyHeap heap = new MyHeap<String>();
+		MyHeap heap = new MyHeap<String>(false);
 		heap.add(Integer.valueOf(4));
 		System.out.println(heap);
-		heap.add(Integer.valueOf(10));
+		heap.add(Integer.valueOf(8));
 		System.out.println(heap);
 		heap.add(Integer.valueOf(2));
 		heap.add(Integer.valueOf(1));
