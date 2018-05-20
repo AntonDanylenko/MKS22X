@@ -1,18 +1,20 @@
 import java.util.Arrays;
 
-public class MyHeap{
-    private String[] data;
+public class MyHeap<T extends Comparable<T>>{
+    private T[] data;
     private boolean max;
     private int size;
     
+	@SuppressWarnings("unchecked")
     public MyHeap(){
 	max = true;
-	data = new String[10];
+	data = (T[]) new Comparable[10];
     }//- construct empty max heap
 
+	@SuppressWarnings("unchecked")
     public MyHeap(boolean bool){
 	max = bool;
-	data = new String[10];
+	data = (T[]) new Comparable[10];
     } //- true: construct empty max heap, false: construct empty min heap.
 
 	public String toString(){
@@ -35,27 +37,10 @@ public class MyHeap{
 			}
 			result += "\n";
 		}
-		
-		
-		/*for (int n=0; n<Math.pow(2, rows)-1; n++){
-			result += " ";
-		}
-		result = result + data[0] + "\n";
-		
-		for (int n=0; n<Math.pow(2, rows-1)-1; n++){
-			result += " ";
-		}
-		result = result + data[1];
-		for (int n=0; n<Math.pow(2, rows)-1; n++){
-			result += " ";
-		}
-		result = result + data[2] + "\n";*/
-		
-		
 		return result;
 	}
 	
-    public void add(String s){
+    public void add(T s){
 		if (size>=data.length){
 			resize();
 		}
@@ -84,8 +69,9 @@ public class MyHeap{
 		}
     }
 	
+	@SuppressWarnings("unchecked")
 	public void resize(){
-		String[] temp = new String[data.length*2];
+		T[] temp = (T[]) new Comparable[data.length*2];
 		for (int n=0; n<size; n++){
 			temp[n] = data[n];
 		}
@@ -93,65 +79,61 @@ public class MyHeap{
 	}
     
 	public void swap(int a, int b){
-		String temp = data[a];
+		T temp = data[a];
 		data[a] = data[b];
 		data[b] = temp;
 	}
 	
-    public String remove(){
-	String element = data[0];
-	//data[0] = data[size-1]; SWITCH THEN PUSH UP
+    public T remove(){
+	T element = data[0];
+	data[0] = data[size-1]; //SWITCH THEN PUSH UP
+	data[size-1] = null;
+	size--;
 	int index = 0;
 	int rows = (int) (Math.log(size) / Math.log(2));
-	for (int n=0; n<rows-1; n++){
+	while (2*index+2<size){
 	    if (data[2*index+1].compareTo(data[2*index+2])<0 ^ max){
-	        data[index] = data[2*index+1];
+	        swap(index, 2*index+1);
 	        index = 2*index+1;
 	    }
 	    else{
-	        data[index] = data[2*index+2];
-		index = 2*index+2;
+	        swap(index, 2*index+2);
+			index = 2*index+2;
 	    }
 	}
-	if (2*index+2<size){
-	    if (data[2*index+1].compareTo(data[2*index+2])<0 ^ max){
-	        data[index] = data[2*index+1];
-	        index = 2*index+1;
-	    }
-	    else{
-	        data[index] = data[2*index+2];
-		index = 2*index+2;
-	    }
+	if (2*index+2==size && data[index].compareTo(data[2*index+1])<0){
+		swap(index, 2*index+1);
 	}
-	else if (2*index+1<size){
-	    data[index] = data[2*index+1];
-	    index = 2*index+1;
-	}
-	data[index]=null;
 	return element;
     }
 	
 
-    public String peek(){
-	return "";
+    public T peek(){
+		return data[0];
     }
 
     public int size(){
 	return size;
     }
 	
+	@SuppressWarnings("unchecked")
 	public static void main(String[]args){
-		MyHeap heap = new MyHeap();
-		heap.add("a");
+		MyHeap heap = new MyHeap<String>();
+		heap.add(Integer.valueOf(4));
 		System.out.println(heap);
-		heap.add("d");
+		heap.add(Integer.valueOf(10));
 		System.out.println(heap);
-		heap.add("b");
-		heap.add("c");
-		heap.add("e");
-		heap.add("g");
-		heap.add("f");
-		heap.add("a");
+		heap.add(Integer.valueOf(2));
+		heap.add(Integer.valueOf(1));
+		heap.add(Integer.valueOf(7));
+		heap.add(Integer.valueOf(8));
+		heap.add(Integer.valueOf(3));
+		heap.add(Integer.valueOf(7));
+		heap.add(Integer.valueOf(6));
+		heap.add(Integer.valueOf(4));
+		heap.add(Integer.valueOf(3));
+		heap.add(Integer.valueOf(0));
+		heap.add(Integer.valueOf(2));
 		System.out.println(heap);
 		heap.remove();
 		System.out.println(heap);
