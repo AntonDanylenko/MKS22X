@@ -116,6 +116,12 @@ public class MyHeap<T extends Comparable<T>>{
 	return size;
     }
 	
+	public void heapify(T[] unsorted){
+		for (int n=0; n<unsorted.length; n++){
+			add(unsorted[n]);
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	public static void main(String[]args){
 		MyHeap heap = new MyHeap<String>(false);
