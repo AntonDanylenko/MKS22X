@@ -1,13 +1,13 @@
 public class FrontierQueue implements Frontier{
-    private String[] queue;
+    private Location[] queue;
 	private int size;
 	
 	public FrontierQueue(){
-		queue = new String[10];
+		queue = new Location[10];
 	}
 	
 	public void resize(){
-		String[] temp = new String[queue.length*2];
+		Location[] temp = new Location[queue.length*2];
 		for (int n=0; n<size; n++){
 			temp[n] = queue[n];
 		}

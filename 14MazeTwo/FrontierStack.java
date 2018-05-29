@@ -1,13 +1,13 @@
 public class FrontierStack implements Frontier{
-    private String[] stack;
+    private Location[] stack;
 	private int size;
 	
 	public FrontierStack(){
-		stack = new String[10];
+		stack = new Location[10];
 	}
 	
 	public void resize(){
-		String[] temp = new String[stack.length*2];
+		Location[] temp = new Location[stack.length*2];
 		for (int n=0; n<size; n++){
 			temp[n] = stack[n];
 		}
