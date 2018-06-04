@@ -47,6 +47,28 @@ public class MazeSolver{
 
   public static void main(String[]args){
 	MazeSolver test = new MazeSolver("data1.dat");
+	test.solve();
+	System.out.println(test);
+	MazeSolver test2 = new MazeSolver("data2.dat");
+	test2.solve();
+	System.out.println(test2);
+	MazeSolver test3 = new MazeSolver("data3.dat");
+	test3.solve();
+	System.out.println(test3);
+	MazeSolver test4 = new MazeSolver("data4.dat");
+	test4.solve();
+	System.out.println(test4);
+	MazeSolver test5 = new MazeSolver("data5.dat");
+	test5.solve();
+	System.out.println(test5);
+	MazeSolver test6 = new MazeSolver("data6.dat");
+	test6.solve();
+	System.out.println(test6);
+	MazeSolver test7 = new MazeSolver("data7.dat");
+	test7.solve();
+	System.out.println(test7);
+
+	/*MazeSolver test = new MazeSolver("data1.dat");
 	test.solve(1);
 	System.out.println(test);
 	MazeSolver test2 = new MazeSolver("data2.dat");
@@ -66,6 +88,6 @@ public class MazeSolver{
 	System.out.println(test6);
 	MazeSolver test7 = new MazeSolver("data7.dat");
 	test7.solve(1);
-	System.out.println(test7);
+	System.out.println(test7);*/
   }
 }

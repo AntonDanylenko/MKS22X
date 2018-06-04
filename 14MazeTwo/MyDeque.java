@@ -31,19 +31,20 @@ public class MyDeque<E>{
 	
 	@SuppressWarnings("unchecked") private void doubleCap(){
 	    E[] temp = (E[]) new Object[deque.length * 2];
-		if (back<front){
-			for (int n=0; n<=back; n++){
+		if (back == 0){
+			back = deque.length;
+			for (int n=0; n<deque.length; n++){
+				temp[n] = deque[n];
+			}
+		}
+		else{
+			for (int n=0; n<back; n++){
 				temp[n] = deque[n];
 			}
 			for (int r=front; r<deque.length; r++){
 				temp[temp.length - deque.length + r] = deque[r];
 			}
 			front += deque.length;
-		}
-		else{
-			for (int n=front; n<=back; n++){
-				temp[n] = deque[n];
-			}
 		}
 		deque = temp;
 		//System.out.println("frrront =" + front + ", back =" + back);
@@ -58,12 +59,13 @@ public class MyDeque<E>{
 		if (size()==0){
 		    //System.out.println("front = null");
 			deque[front] = element;
+			back++;
 			size++;
 			//System.out.println("front =" + front + ", back =" + back);
 		}
 		else{
 			if (front<1){
-				if (deque[deque.length-1] != null){
+				if (front == back){
 					doubleCap();
 				}
 				deque[deque.length-1] = element;
@@ -71,7 +73,7 @@ public class MyDeque<E>{
 				size++;
 			}
 			else{
-				if (deque[front-1]!=null){
+				if (back == front){
 					doubleCap();
 				}
 				deque[front-1] = element;
@@ -89,28 +91,32 @@ public class MyDeque<E>{
 		//System.out.println(size());
 		if (size()==0){
 			deque[back] = element;
+			back++;
 			size++;
 			//System.out.println("front =" + front + ", back =" + back);
 		}
 		else{
-			if (back+1==deque.length){
-				if (deque[0]!=null){
+			if (back==0){
+				if (back == front){
 					doubleCap();
-					deque[back+1] = element;
+					deque[back] = element;
 					back++;
 				}
 				else{
 				    deque[0] = element;
-				    back = 0;
+				    back = 1;
 				}
 				size++;
 			}
 			else{
-				if (back+1 == front){
+				if (back == front){
 					doubleCap();
 				}
-				deque[back + 1] = element;
+				deque[back] = element;
 				back++;
+				if (back == deque.length){
+					back = 0;
+				}
 				size++;
 			}
 			//System.out.println("front =" + front + ", back =" + back);
@@ -143,16 +149,20 @@ public class MyDeque<E>{
 	}
 	else{
 	    //System.out.println("Last= " + back);
-	    E value = deque[back];
-	    deque[back] = null;
-	    if (back == 0){
-		back = deque.length-1;
-	    }
-	    else{
-		back--;
-	    }
-	    size--;
-	    return value;
+		if (back == 0){
+			E value = deque[deque.length-1];
+			deque[deque.length-1] = null;
+			back = deque.length-1;
+			size--;
+			return value;
+		}
+		else{
+			E value = deque[back-1];
+			deque[back-1] = null;
+			back--;
+			size--;
+			return value;
+		}
 	}
     }
 
@@ -167,7 +177,10 @@ public class MyDeque<E>{
 	if (size()==0){
 	    throw new NoSuchElementException();
 	}
-	return deque[back];
+	if (back==0){
+		return deque[deque.length-1];
+	}
+	return deque[back-1];
     }
     
 	public static void main(String[]args){
@@ -190,6 +203,8 @@ public class MyDeque<E>{
 		System.out.println(thing);
 		thing.addLast(6);
 		System.out.println(thing);
+		//thing.addFirst(13);
+		//System.out.println(thing);
 		thing.addLast(8);
 		System.out.println(thing);
 		thing.addLast(10);
