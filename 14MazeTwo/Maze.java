@@ -40,7 +40,11 @@ public class Maze{
   // '@' - part of solution
   // 'S' - starting space (do not replace this)
   public String toString(){
-	return "";
+	String result = "";
+	for (int n=0; n<board.length; n++){
+		result = result + Arrays.toString(board[n]) + "\n";
+	}
+	return result;
   }
    
   // Work on this method as a group! 
@@ -52,15 +56,32 @@ public class Maze{
   // adjacent to n and  not visited
   // all the Locations in this list should have their previous set to n.
   public Location[] getNeighbors(Location n){
-    return null;
+    Location[] neighbors = new Location[4];
+	int count=0;
+	if(n.getY() + 1 < board[0].length && board[n.getX()][n.getY() + 1] == ' ' || n.getY() + 1 < board[0].length && board[n.getX()][n.getY() + 1] == 'E'){
+	  neighbors[count] = new Location(n.getX(), n.getY() + 1, n);
+	  count++;
+    }
+    if(n.getY() - 1 >= 0 && board[n.getX()][n.getY() - 1] == ' ' || n.getY() - 1 >= 0 && board[n.getX()][n.getY() - 1] == 'E'){
+	  neighbors[count] = new Location(n.getX(), n.getY() - 1, n);
+	  count++;
+    }
+	if(n.getX() + 1 < board.length && board[n.getX() + 1][n.getY()] == ' ' || n.getX() + 1 < board.length && board[n.getX() + 1][n.getY()] == 'E'){
+      neighbors[count] = new Location(n.getX() + 1, n.getY(), n);
+	  count++;
+    }
+    if(n.getX() - 1 >= 0  && board[n.getX() - 1][n.getY()] == ' ' || n.getX() - 1 >= 0  && board[n.getX() - 1][n.getY()] == 'E'){
+      neighbors[count] = new Location(n.getX() - 1, n.getY(), n);
+    }
+    return neighbors;
   }
 
   public Location getStart(){
-    return null;
+    return start;
   }
 
   public Location getEnd(){
-    return null;
+    return end;
   }
 
   public static void main(String[]args) throws FileNotFoundException{
