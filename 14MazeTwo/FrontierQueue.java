@@ -1,37 +1,25 @@
+import java.util.NoSuchElementException;
+
 public class FrontierQueue implements Frontier{
-    private Location[] queue;
-	private int size;
+    private MyDeque<Location> queue;
 	
 	public FrontierQueue(){
-		queue = new Location[10];
+		queue = new MyDeque<>();
 	}
 	
-	public void resize(){
-		Location[] temp = new Location[queue.length*2];
-		for (int n=0; n<size; n++){
-			temp[n] = queue[n];
-		}
-		queue = temp;
-	}
-
 	public Location next(){
-		Location result = queue[0];
-		for (int n=1; n<size; n++){
-			queue[n-1] = queue[n];
-		}
-		size--;
-		return result;
+		return queue.removeFirst();
 	}
 
 	public void add(Location n){
-		if (size==queue.length){
-			resize();
-		}
-		queue[size] = n;
-		size++;
+		queue.addLast(n);
 	}
 
 	public boolean hasNext(){
-		return size!=0;
+		try{
+			return queue.getFirst() != null;
+		}catch(NoSuchElementException e){
+			return false;
+		}
 	}
 }
