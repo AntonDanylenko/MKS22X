@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.FileNotFoundException;
 import java.io.*;
 
 public class Maze{
@@ -53,29 +54,25 @@ public class Maze{
 	start = new Location(startRow,startCol,null);
   }
 
-  // '#' - wall 
-  // ' ' - open space
-  // '?' - frontier space
-  // '.' - visited space
-  // 'E' - end space (do not replace this)
-  // '@' - part of solution
-  // 'S' - starting space (do not replace this)
   public String toString(){
 	String result = "";
-	for (int n=0; n<board.length; n++){
-		result = result + Arrays.toString(board[n]) + "\n";
+	for (int r=0; r<board.length; r++){
+	  for (int c=0; c<board[r].length; c++){
+		result += board[r][c];
+	  }
+	  result += "\n";
 	}
 	return result;
   }
    
-  // Work on this method as a group! 
+  public void setSpot(int r, int c, char val){
+	board[r][c] = val;
+  }
+
   public String toStringColor(){
 	return "";
   }
 
-  //return a list of Locations that are:
-  // adjacent to n and  not visited
-  // all the Locations in this list should have their previous set to n.
   public Location[] getNeighbors(Location n){
     Location[] neighbors = new Location[4];
 	int count=0;
