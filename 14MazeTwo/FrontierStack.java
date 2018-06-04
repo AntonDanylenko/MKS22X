@@ -1,35 +1,25 @@
-public class FrontierStack implements Frontier{
-    private Location[] stack;
-	private int size;
-	
-	public FrontierStack(){
-		stack = new Location[10];
-	}
-	
-	public void resize(){
-		Location[] temp = new Location[stack.length*2];
-		for (int n=0; n<size; n++){
-			temp[n] = stack[n];
-		}
-		stack = temp;
-	}
+import java.util.NoSuchElementException;
 
+public class FrontierStack implements Frontier{
+    private MyDeque<Location> stack;
+
+	public FrontierStack(){
+		stack = new MyDeque<>();
+	}
+	
 	public Location next(){
-		Location result = stack[size-1];
-		stack[size-1] = null;
-		size--;
-		return result;
+		return stack.removeFirst();
 	}
 
 	public void add(Location n){
-		if (size==stack.length){
-			resize();
-		}
-		stack[size] = n;
-		size++;
+		stack.addFirst(n);
 	}
 
 	public boolean hasNext(){
-		return size!=0;
+		try{
+			return stack.getFirst() != null;
+		}catch(NoSuchElementException e){
+			return false;
+		}
 	}
 }
