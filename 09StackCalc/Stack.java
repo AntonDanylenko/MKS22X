@@ -18,4 +18,8 @@ public class Stack{
     public void push(double value){
 	stack.add(value);
     }
+	
+	public int size(){
+		return stack.size();
+	}
 }
