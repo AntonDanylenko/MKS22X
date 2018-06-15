@@ -110,6 +110,18 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	return m.getValue();
     }
 	
+	//GETNODE()
+	private Node getNode(int index){
+        if(index >= length || index < 0){
+            return null;
+        }
+        Node current = first;
+        for(int i = 0; i < index; i++){
+            current = current.getNext();
+        }
+        return current;
+    }
+
 	//SET()
     public T set(int index,T value){
 	if(index>=length || index<0){
@@ -160,18 +172,25 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
 	//ADD()
     public boolean add(int index,T value){
 	if (index<0 || index>length){
-	    return false;
-	}
-	if (index == 0){
-	    first = new Node(value);
-	    if (length == 0){
-		last = first;
-	    }
-	    length++; 
+	    throw new IndexOutOfBoundsException();
 	}
 	if (index == length){
 	    add(value);
+		return true;
 	}
+	Node temp = new Node(value);
+	if (index == 0){
+	    temp.setNext(first);
+		first.setPrev(temp);
+		first = temp;
+		length++;
+		return true;
+	}
+	temp.setNext(getNode(index));
+    temp.setPrev(getNode(index - 1));
+    getNode(index - 1).setNext(temp);
+    getNode(index).setPrev(temp);
+	length++;
 	return true;
     }
 
@@ -301,6 +320,18 @@ public class MyLinkedListImproved<T extends Comparable<T>> implements Iterable<T
     list2.add("yyy");
     list2.add("zzz");
     list2.add("LLL");
+    list2.add(0,"yyy");
+    list2.add(0,"zzz");
+    list2.add(0,"LLL");
+    list2.add(0,"yyy");
+    list2.add(0,"zzz");
+    list2.add(0,"LLL");
+    list2.add(0,"yyy");
+    list2.add(0,"zzz");
+    list2.add(0,"LLL");
+    list2.add(0,"yyy");
+    list2.add(0,"zzz");
+    list2.add(0,"LLL");
     System.out.println(list2);
     list.extend(list2);
     System.out.println(list);
