@@ -5,6 +5,11 @@ import java.io.*;
 public class Maze{
   private Location start,end;
   private char[][] board;
+  private boolean isAStar;
+
+  public void setAStar(boolean isA){
+	isAStar = isA;
+  }
 
   public Maze(String boardText){
 	ArrayList<char[]> lines = new ArrayList<char[]>();
@@ -50,8 +55,12 @@ public class Maze{
 	    System.out.println("No 'S' or 'E' found");
 	    System.exit(0);
 	}
-	end = new Location(endRow,endCol,null);
-	start = new Location(startRow,startCol,null);
+	end = new Location(endRow,endCol,null,0,0);
+	start = new Location(startRow,startCol,null,0,0);
+  }
+
+  public static int getDistance(int x, int y,Location other){
+      return Math.abs(x-other.getX())+Math.abs(y-other.getY());
   }
 
   public String toString(){
@@ -77,19 +86,39 @@ public class Maze{
     Location[] neighbors = new Location[4];
 	int count=0;
 	if(n.getY() + 1 < board[0].length && board[n.getX()][n.getY() + 1] == ' ' || n.getY() + 1 < board[0].length && board[n.getX()][n.getY() + 1] == 'E'){
-	  neighbors[count] = new Location(n.getX(), n.getY() + 1, n);
+	  if (!isAStar){
+		neighbors[count] = new Location(n.getX(), n.getY() + 1,n, getDistance(n.getX(), n.getY()+1, end), 0);
+	  }
+	  else{
+		neighbors[count] = new Location(n.getX(), n.getY() + 1,n, getDistance(n.getX(), n.getY()+1, end), n.getDistGone() + 1);
+	  }
 	  count++;
     }
     if(n.getY() - 1 >= 0 && board[n.getX()][n.getY() - 1] == ' ' || n.getY() - 1 >= 0 && board[n.getX()][n.getY() - 1] == 'E'){
-	  neighbors[count] = new Location(n.getX(), n.getY() - 1, n);
+	  if (!isAStar){
+		neighbors[count] = new Location(n.getX(), n.getY() - 1,n, getDistance(n.getX(), n.getY()-1, end), 0);
+	  }
+	  else{
+		neighbors[count] = new Location(n.getX(), n.getY() - 1,n, getDistance(n.getX(), n.getY()-1, end), n.getDistGone() + 1);
+	  }
 	  count++;
     }
 	if(n.getX() + 1 < board.length && board[n.getX() + 1][n.getY()] == ' ' || n.getX() + 1 < board.length && board[n.getX() + 1][n.getY()] == 'E'){
-      neighbors[count] = new Location(n.getX() + 1, n.getY(), n);
+      if (!isAStar){
+		neighbors[count] = new Location(n.getX()+1, n.getY(),n, getDistance(n.getX()+1, n.getY(), end), 0);
+	  }
+	  else{
+		neighbors[count] = new Location(n.getX()+1, n.getY(),n, getDistance(n.getX()+1, n.getY(), end), n.getDistGone() + 1);
+	  }
 	  count++;
     }
     if(n.getX() - 1 >= 0  && board[n.getX() - 1][n.getY()] == ' ' || n.getX() - 1 >= 0  && board[n.getX() - 1][n.getY()] == 'E'){
-      neighbors[count] = new Location(n.getX() - 1, n.getY(), n);
+      if (!isAStar){
+		neighbors[count] = new Location(n.getX()-1, n.getY(),n, getDistance(n.getX()-1, n.getY(), end), 0);
+	  }
+	  else{
+		neighbors[count] = new Location(n.getX()-1, n.getY(),n, getDistance(n.getX()-1, n.getY(), end), n.getDistGone() + 1);
+	  }
     }
     return neighbors;
   }

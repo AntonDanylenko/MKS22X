@@ -18,10 +18,6 @@ public class FrontierStack implements Frontier{
 	}
 
 	public boolean hasNext(){
-		try{
-			return stack.getFirst() != null;
-		}catch(NoSuchElementException e){
-			return false;
-		}
+		return stack.peek() != null;
 	}
 }

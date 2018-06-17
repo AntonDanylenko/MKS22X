@@ -4,17 +4,41 @@ public class MazeSolver{
 
   public MazeSolver(String mazeText){
       maze = new Maze(mazeText);
+	  animate = false;
   }
 
   public boolean solve(){ return solve(0); }
+
+	private void wait(int millis){
+         try {
+             Thread.sleep(millis);
+         }
+         catch (InterruptedException e) {
+         }
+     }
+      public void clearTerminal(){
+        System.out.println("\033[2J\033[1;1H");
+    }
+
+	public  boolean animate;
+    public void setAnimate(boolean a){
+	animate = a;
+    }
 
   public boolean solve(int mode){
       if (mode == 0){
 	    frontier = new FrontierQueue();
       }
-      else{
+      else if (mode == 1){
 	    frontier = new FrontierStack();
       }
+	  else {
+		maze.setAStar(true);
+		if (mode == 2){
+		  maze.setAStar(false);
+		}
+		frontier = new FrontierPriorityQueue();
+	  }
       
 	  Location[] neighbors = maze.getNeighbors(maze.getStart());
       for(int n = 0; n < neighbors.length && neighbors[n] != null; n++){
@@ -22,6 +46,11 @@ public class MazeSolver{
 	  }
 
 	  while (frontier.hasNext()){
+		if(animate){
+            clearTerminal();
+            System.out.println(this);
+            wait(40);
+        }
 		Location next = frontier.next();
 		maze.setSpot(next.getX(), next.getY(), '.');
 		Location[] neighbors2 = maze.getNeighbors(next);
@@ -46,10 +75,11 @@ public class MazeSolver{
   }
 
   public static void main(String[]args){
-	MazeSolver test = new MazeSolver("data1.dat");
-	test.solve();
+	MazeSolver test = new MazeSolver("data3.dat");
+	test.setAnimate(true);
+	test.solve(3);
 	System.out.println(test);
-	MazeSolver test2 = new MazeSolver("data2.dat");
+	/*MazeSolver test2 = new MazeSolver("data2.dat");
 	test2.solve();
 	System.out.println(test2);
 	MazeSolver test3 = new MazeSolver("data3.dat");
@@ -66,7 +96,7 @@ public class MazeSolver{
 	System.out.println(test6);
 	MazeSolver test7 = new MazeSolver("data7.dat");
 	test7.solve();
-	System.out.println(test7);
+	System.out.println(test7);*/
 
 	/*MazeSolver test = new MazeSolver("data1.dat");
 	test.solve(1);
