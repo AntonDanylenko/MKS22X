@@ -18,10 +18,6 @@ public class FrontierQueue implements Frontier{
 	}
 
 	public boolean hasNext(){
-		try{
-			return queue.getFirst() != null;
-		}catch(NoSuchElementException e){
-			return false;
-		}
+		return queue.peek() != null;
 	}
 }
