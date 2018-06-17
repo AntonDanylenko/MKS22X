@@ -1,10 +1,12 @@
 import java.util.NoSuchElementException;
+import java.util.*;
+import java.io.*;
 
 public class FrontierQueue implements Frontier{
-    private MyDeque<Location> queue;
+    private ArrayDeque<Location> queue;
 	
 	public FrontierQueue(){
-		queue = new MyDeque<>();
+		queue = new ArrayDeque<>();
 	}
 	
 	public Location next(){

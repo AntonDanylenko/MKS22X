@@ -1,10 +1,12 @@
 import java.util.NoSuchElementException;
+import java.util.*;
+import java.io.*;
 
 public class FrontierStack implements Frontier{
-    private MyDeque<Location> stack;
+    private ArrayDeque<Location> stack;
 
 	public FrontierStack(){
-		stack = new MyDeque<>();
+		stack = new ArrayDeque<>();
 	}
 	
 	public Location next(){
